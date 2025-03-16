@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>ひたすら英単語 - 設定</title>
+        <link rel="icon" href="icon.jpg">
+        <link rel="apple-touch-icon" sizes="192x192" href="icon.jpg">
+        <link rel="stylesheet" type="text/css" href="setting.css" />
+    </head>
+    <body>
+        <div id="box">
+            <h2><a href="../index.html">ホーム</a> > 設定</h2>
+            <div id="display">
+                <div>
+                    <div>出題スピード</div>
+                    <div><select id="speed">
+                        <option value="1">1秒</option>
+                        <option value="2">2秒</option>
+                        <option value="3">3秒</option>
+                        <option value="4" selected>4秒</option>
+                        <option value="5">5秒</option>
+                        <option value="6">6秒</option>
+                        <option value="7">7秒</option>
+                        <option value="8">8秒</option>
+                        <option value="9">9秒</option>
+                    </select></div>
+                </div>
+                <div>
+                    <div>復習機能</div>
+                    <div><select id="swi">
+                        <option value="0" selected>あり</option>
+                        <option value="1">なし①</option>
+                        <option value="2">なし②</option>
+                    </select></div>
+                    <div>
+                        なし①：「思い出せた」を押すことで、今後出題されなくなります。<br>
+                        なし②：「思い出せた」を押しても、今後出題され続けます。
+                    </div>
+                </div>
+                <div class="huku">
+                    <div>頻度</div>
+                    <div><select id="next">
+                        <option value="0" selected>デフォルト</option>
+                        <option value="1">毎日</option>
+                        <option value="2">2日後</option>
+                        <option value="3">3日後</option>
+                        <option value="4">4日後</option>
+                        <option value="5">5日後</option>
+                        <option value="6">6日後</option>
+                        <option value="7">7日後</option>
+                    </select></div>
+                    <div>
+                        デフォルト：忘却曲線に基づいた復習タイミング（翌日、3日後、1週間後、2週間後、30日後、60日後、以後ループ）に再出題されます。<br>
+                    </div>
+                    <div></div><!--選択不可にさせるための蓋-->
+                </div>
+                <div class="huku">
+                    <div>優先順位</div>
+                    <div><select id="rank">
+                        <option value="0" selected>復習</option>
+                        <option value="1">未出題</option>
+                        <option value="2">ランダム</option>
+                    </select></div>
+                    <div>
+                        復習：復習期限の来ている単語から優先して出題します。<br>
+                        未出題：未出題の単語から優先して出題します。<br>
+                    </div>
+                    <div></div><!--選択不可にさせるための蓋-->
+                </div>
+                <div>
+                    <div id="save">保存</div>
+                </div>
+                <div>
+                    当サイトのCookieに保存されます。
+                </div>
+                <div>
+                    <div id="reset">リセット</div>
+                </div>
+                <div>
+                    当サイトに保存されたすべてのCookieを削除します。
+                </div>
+            </div>
+        </div>
+        <div id="grayback">
+            <div id="resetconfirm">
+                <div>
+                    本当にリセットしますか？<br>
+                    ※当サイトに保存された学習記録もすべて削除されます。
+                </div>
+                <div id="no">いいえ</div>
+                <div id="yes">はい</div>
+            </div>
+        </div>
+        <div id="savenoti">保存しました。</div>
+        <div id="resetnoti">削除しました。</div>
+
+
+        <script src="setting.js"></script>
+    </body>
+</html>
