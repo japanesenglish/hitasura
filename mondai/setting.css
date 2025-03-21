@@ -34,30 +34,30 @@ body{
             }
             &>div{
                 display: inline-block;
-                &:nth-of-type(1){
+                &.tit{
                     font-weight: bold;
-                    &#save{
-                        border: black solid 1px;
-                        border-radius: 3px;
-                        margin-left: 50%;
-                        transform: translate(-50%);
-                        width: 100%;
-                        text-align: center;
-                        &:hover{
-                            cursor: pointer;
-                        }
+                }
+                &#save{
+                    border: black solid 1px;
+                    border-radius: 3px;
+                    margin-left: 50%;
+                    transform: translate(-50%);
+                    width: 100%;
+                    text-align: center;
+                    &:hover{
+                        cursor: pointer;
                     }
-                    &#reset{
-                        border: black solid 1px;
-                        border-radius: 3px;
-                        margin-left: 50%;
-                        transform: translate(-50%);
-                        background-color: rgba(255, 0, 0, 0.493);
-                        width: 100%;
-                        text-align: center;
-                        &:hover{
-                            cursor: pointer;
-                        }
+                }
+                &#reset{
+                    border: black solid 1px;
+                    border-radius: 3px;
+                    margin-left: 50%;
+                    transform: translate(-50%);
+                    background-color: rgba(255, 0, 0, 0.493);
+                    width: 100%;
+                    text-align: center;
+                    &:hover{
+                        cursor: pointer;
                     }
                 }
             }
@@ -78,6 +78,7 @@ body{
     & #resetconfirm{
         position: fixed;
         top: 180px;
+        display: none;
         border: black solid 1px;
         border-radius: 3px;
         margin-left: 50%;
@@ -100,6 +101,33 @@ body{
             }
         }
     }
+    & #err{
+        position: fixed;
+        top: 180px;
+        display: none;
+        border: black solid 1px;
+        border-radius: 3px;
+        margin-left: 50%;
+        transform: translate(-50%);
+        padding: 10px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        height: auto;
+        width: 60%;
+        max-width: 400px;
+        text-align: center;
+        & #ok{
+            background-color: rgba(142, 141, 160, 0.63);
+            border: black solid 1px;
+            text-align: center;
+            margin: auto;
+            margin-top: 20px;
+            width: 50%;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 #savenoti,#resetnoti{
@@ -116,4 +144,8 @@ body{
     font-size: 110%;
     text-align: center;
     transition: all 0.5s;
+}
+
+& .red{
+    color: red;
 }

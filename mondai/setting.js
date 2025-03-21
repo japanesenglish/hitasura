@@ -1,12 +1,12 @@
 let alloption = document.querySelectorAll('option');
 let speedlist = document.querySelectorAll('#speed>option');
 let swilist = document.querySelectorAll('#swi>option');
-let nextlist = document.querySelectorAll('#next>option');
-let ranklist = document.querySelectorAll('#rank>option');
+let nextlist = document.querySelectorAll('.next>option');
+let banlist = document.querySelectorAll('#ban>option');
 let speed = '';
 let swi = '';
 let next = '';
-let rank = '';
+let ban = '';
 let cookies = document.cookie;
 let cookieslist = cookies.split(';');
 let contents = [];
@@ -20,8 +20,8 @@ cookieslist.forEach(function(car){
         swi = content[1];
     } else if (content[0] == 'next'){
         next = content[1];
-    } else if (content[0] == 'rank'){
-        rank = content[1];
+    } else if (content[0] == 'ban'){
+        ban = content[1];
     };
     contents.push(content[0]);
 });
@@ -37,12 +37,17 @@ if(swi !== ''){
     gray()
 };
 if(next !== ''){
-    nextlist[next].setAttribute('selected','');
+    next = next.split('a');
+    next.shift();
+    let i = -1;
+    next.forEach(function(car){
+        nextlist[Number(car) + i].setAttribute('selected','');
+        i = i + 99;
+    });
 };
-if(rank !== ''){
-    ranklist[rank].setAttribute('selected','');
+if(ban !== ''){
+    banlist[ban].setAttribute('selected','');
 };
-console.log(cookies,contents)
 
 //復習なしで灰色
 document.getElementById('swi').addEventListener('change',function(){
@@ -74,29 +79,50 @@ function gray(){
 
 //保存ボタン
 document.getElementById('save').addEventListener('click',function(){
-    var select = document.getElementById('speed').value;
-    document.cookie = 'speed=' + select;' max-age=31536000';
-    var select = document.getElementById('swi').value;
-    document.cookie = 'swi=' + select;' max-age=31536000';
-    var select = document.getElementById('next').value;
-    document.cookie = 'next=' + select;' max-age=31536000';
-    var select = document.getElementById('rank').value;
-    document.cookie = 'rank=' + select;' max-age=31536000';
-    let noti =document.getElementById('savenoti');
-    noti.style.top = '10px';
-    setTimeout(() => {
-        noti.style.top = '-100px';
+    let days = document.querySelectorAll('.next');
+    var select = '';
+    let bar = 0;
+    let can = '';
+    days.forEach(function(car){
+        select = select + 'a' + car.value;
+        if(bar > Number(car.value)){
+            can = 'not';
+        };
+        bar = Number(car.value);
+    });
+    if(can == ''){
+        document.cookie = 'next=' + select;' max-age=31536000';
+        var select = document.getElementById('speed').value;
+        document.cookie = 'speed=' + select;' max-age=31536000';
+        var select = document.getElementById('swi').value;
+        document.cookie = 'swi=' + select;' max-age=31536000';
+        var select = document.getElementById('ban').value;
+        document.cookie = 'ban=' + select;' max-age=31536000';
+        let noti =document.getElementById('savenoti');
+        noti.style.top = '10px';
         setTimeout(() => {
-            noti.style.top = '';
-        }, 500);
-    }, 2000);
+            noti.style.top = '-100px';
+            setTimeout(() => {
+                noti.style.top = '';
+            }, 500);
+        }, 2000);
+    } else {
+        document.getElementById('grayback').style.display = 'block';
+        document.getElementById('err').style.display = 'block';
+    };
 });
+document.getElementById('ok').addEventListener('click',function(){
+    document.getElementById('grayback').style.display = '';
+    document.getElementById('err').style.display = '';
+})
 //リセットボタン
 document.getElementById('reset').addEventListener('click',function(){
     document.getElementById('grayback').style.display = 'block';
+    document.getElementById('resetconfirm').style.display = 'block';
 });
 document.getElementById('no').addEventListener('click',function(){
     document.getElementById('grayback').style.display = '';
+    document.getElementById('resetconfirm').style.display = '';
 });
 document.getElementById('yes').addEventListener('click',function(){
     document.getElementById('grayback').style.display = '';

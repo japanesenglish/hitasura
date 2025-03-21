@@ -146,15 +146,26 @@ body{
             border-collapse: collapse;
             border: black solid 1px;
             width: 100%;
-            & tr:nth-of-type(3){
-                text-align: right;
-            }
             & th,td{
                 border: black solid 1px;
                 width: 13.6%;
+                background-color: white;
                 &:nth-of-type(1){
                     width: auto;
                 }
+            }
+            & td:hover{
+                cursor: pointer;
+                &.dont{
+                    cursor: auto;
+                }
+            }
+            & tr:nth-of-type(3){
+                text-align: right;
+            }
+            & tr:nth-of-type(4) td{
+                text-align: right;
+                background-color: rgb(228, 229, 236);
             }
         }
     }
@@ -193,3 +204,4 @@ body{
         }
     }
 }
+
