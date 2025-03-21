@@ -6,8 +6,8 @@ let rest = [];
 let day = '';
 let ngslspent1 = '';
 let ngslspent2 = '';
-let speed = '';
-let swi = '';
+let speed = 4;
+let swi = 0;
 let rank = '';
 let ban = '';
 let next = [1,3,7,14,30,60];
@@ -38,15 +38,9 @@ cookieslist.forEach(function(car){
     } else if (content[0] == 'ban'){
         ban = content[1];
     };
+    document.cookie = content[0] + '=' + content[1];' max-age=31536000';
 });
 
-//Cookieの初回設定
-if(speed == ''){
-    speed = '4';
-};
-if(swi == ''){
-    swi = '0';
-};
 //前回訪問からの経過日 実験中！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 let today = new Date;
 let sub = '';
@@ -56,7 +50,7 @@ if(day !== ''){
 } else {
     sub = 0;
 };
-sub = 99;
+sub = 0;
 //spent適応
 spent = document.querySelectorAll('.word>div:nth-of-type(3)');
 if(ngslspent1 !== '' && ngslspent2 !== ''){
@@ -292,7 +286,11 @@ document.getElementById('yes').addEventListener('click',function(){
                         parents[randnum].style.display = 'none';
                     };
                     if(rest[randnum].innerHTML == '-'){
-                        rest[randnum].innerHTML = 1;
+                        if(ban == 0){
+                            rest[randnum].innerHTML = next[5];
+                        } else {
+                            rest[randnum].innerHTML = next[0];
+                        }
                     }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
                         rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
                     };
@@ -348,7 +346,7 @@ document.getElementById('no').addEventListener('click',function(){
                         parents[randnum].style.display = 'none';
                     };
                     if(rest[randnum].innerHTML == '-'){
-                        rest[randnum].innerHTML = 1;
+                        rest[randnum].innerHTML = next[0];
                     };
                     spent[randnum].innerHTML = '0';
                     del();
