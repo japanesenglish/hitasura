@@ -471,7 +471,6 @@ document.getElementById('no').addEventListener('click',function(){
     }
 });
 
-
 //Cookie保存
 function save(){
     ngslspent1 = '';
