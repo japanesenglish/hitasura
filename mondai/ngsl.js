@@ -9,11 +9,12 @@ let ngslspent2 = '';
 let speed = 4;
 let swi = 0;
 let rank = '';
-let ban = '';
+let forb = 1;
+let ban = 0;
 let next = [1,3,7,14,30,60];
 let ngsldef = '';
+let a = 0;
 let cookies = document.cookie;
-console.log(cookies)
 let cookieslist = cookies.split(';');
 //Cookie仕分け
 cookieslist.forEach(function(car){
@@ -35,6 +36,8 @@ cookieslist.forEach(function(car){
         ngsldef = content[1];
     } else if (content[0] == 'rank'){
         rank = content[1];
+    } else if (content[0] == 'forb'){
+        forb = content[1];
     } else if (content[0] == 'ban'){
         ban = content[1];
     };
@@ -50,7 +53,6 @@ if(day !== ''){
 } else {
     sub = 0;
 };
-sub = 0;
 //spent適応
 spent = document.querySelectorAll('.word>div:nth-of-type(3)');
 if(ngslspent1 !== '' && ngslspent2 !== ''){
@@ -98,7 +100,7 @@ if(ngsldef !== ''){
         };
         i = i + 1;
     });
-}
+};
 //chose適応
 if(rank !== ''){
     if(rank <= 6){
@@ -108,12 +110,23 @@ if(rank !== ''){
         let where = '#lower>td:nth-of-type(' + (Number(rank) - 5) + ')';
         document.querySelector(where).style.background = 'gray';
     };
-}
+};
+a = 0;
+document.querySelectorAll('.nows').forEach(function(car){
+    car.innerHTML = next[a] + 'd';
+    a = a + 1;
+})
+//復習なし
+if(swi == 1){
+    document.getElementById('possi').style.display = 'none';
+    rank = '';
+};
+
 //出題
 ens = document.querySelectorAll('.word>div:nth-of-type(1)');
 jps = document.querySelectorAll('.word>div:nth-of-type(2)');
 let possies = [[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]],[0,[]]];
-let a = 0;
+a = 0;
 spent.forEach(function(car){
     if(car.innerHTML == '-'){
         possies[0][0] = possies[0][0] + 1;
@@ -143,7 +156,7 @@ spent.forEach(function(car){
 let rand = '';
 let randnum = '';
 let setid = '';
-let key = '';
+let key = 0;
 function set(){
     if(rank == ''){
         key = 0;
@@ -198,6 +211,34 @@ function del(){
         possies[rank][1].splice(rand,1);
     };
 };
+function list(){
+    document.getElementById('en').innerHTML = ens[possies[rank][1][key]].innerHTML;
+    document.getElementById('jp').innerHTML = jps[possies[rank][1][key]].innerHTML;
+    document.getElementById('bar').style.transition = 'all linear ' + speed + 's';
+    document.getElementById('bar').style.left = '-100%';
+    document.getElementById('jp').style.transition = 'all 0s ' + speed + 's';
+    document.getElementById('jp').style.visibility = 'visible';
+    document.getElementById('jp').style.opacity = '1';
+    setid = setTimeout(() => {
+        document.getElementById('jp').style.transition = ''; 
+        document.getElementById('bar').style.transition = ''; 
+    }, speed * 1000);
+};
+function listall(){
+    rand = Math.floor(Math.random() * ens.length);
+    document.getElementById('en').innerHTML = ens[rand].innerHTML;
+    document.getElementById('jp').innerHTML = jps[rand].innerHTML;
+    document.getElementById('bar').style.transition = 'all linear ' + speed + 's';
+    document.getElementById('bar').style.left = '-100%';
+    document.getElementById('jp').style.transition = 'all 0s ' + speed + 's';
+    document.getElementById('jp').style.visibility = 'visible';
+    document.getElementById('jp').style.opacity = '1';
+    setid = setTimeout(() => {
+        document.getElementById('jp').style.transition = ''; 
+        document.getElementById('bar').style.transition = ''; 
+    }, speed * 1000);
+}
+
 //choose
 let arr = Array.from(document.querySelectorAll('td'))
 arr.splice(7,1);
@@ -218,6 +259,11 @@ arr.forEach(function(car){
         window.location.reload();
     });
 });
+//ボタン変更
+if(rank >= 7){
+    document.getElementById('yes').innerHTML = '次へ';
+    document.getElementById('no').innerHTML = '前へ';
+};
 //list絞り込み
 let parents = document.querySelectorAll('.word');
 if(rank !== ''){
@@ -238,7 +284,13 @@ document.getElementById('start').addEventListener('click',function(){
             document.getElementById('countdown').innerHTML = '1';
             setTimeout(() => {
                 document.getElementById('countdown').style.display = 'none';
-                set();
+                if(swi == 1){
+                    listall();
+                } else if (rank >= 7){
+                    list();
+                } else {
+                    set();
+                };
             }, 1000);
         }, 1000);
     }, 1000);
@@ -252,7 +304,11 @@ document.getElementById('yes').addEventListener('click',function(){
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         } else if(onoff == 'off'){
-            document.getElementById('enbox').style.left = '100%';
+            if(rank >= 7){
+                document.getElementById('enbox').style.top = '240px';
+            } else {
+                document.getElementById('enbox').style.left = '100%';
+            };
             document.getElementById('bar').style.transition = ''; 
             document.getElementById('bar').style.left = ''; 
             document.getElementById('jp').style.visibility = '';
@@ -260,45 +316,59 @@ document.getElementById('yes').addEventListener('click',function(){
             onoff = 'on';
             setTimeout(() => {
                 document.getElementById('enbox').style.transition = 'all 0s';
-                document.getElementById('enbox').style.left = '';
+                if(rank >= 7){
+                    document.getElementById('enbox').style.top = '';
+                } else {
+                    document.getElementById('enbox').style.left = '';
+                };
                 document.getElementById('enbox').style.top = '-100px';
-                if(rank <= 6 || rank == ''){
-                    if(rank == ''){
-                        arr[key].innerHTML = arr[key].innerHTML - 1;
-                        let lowkey = key + 7;
-                        if(lowkey == 13){
-                            lowkey = 12;
-                        };
-                        if(ban == 0 && key == 0){
-                            lowkey = 12;
-                        };
-                        arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
-                    } else {
-                        arr[rank].innerHTML = arr[rank].innerHTML - 1;
-                        let lowrank = Number(rank) + 7;
-                        if(lowrank == 13){
-                            lowrank = 12;
-                        };
-                        if(ban == 0 && rank == 0){
-                            lowrank = 12;
-                        };
-                        arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
-                        parents[randnum].style.display = 'none';
-                    };
-                    if(rest[randnum].innerHTML == '-'){
-                        if(ban == 0){
-                            rest[randnum].innerHTML = next[5];
+                if(swi == 0){
+                    if(rank <= 6 || rank == ''){
+                        if(rank == ''){
+                            arr[key].innerHTML = arr[key].innerHTML - 1;
+                            let lowkey = key + 7;
+                            if(lowkey == 13){
+                                lowkey = 12;
+                            };
+                            if(ban == 0 && key == 0){
+                                lowkey = 12;
+                            };
+                            arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
                         } else {
-                            rest[randnum].innerHTML = next[0];
-                        }
-                    }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
-                        rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
+                            arr[rank].innerHTML = arr[rank].innerHTML - 1;
+                            let lowrank = Number(rank) + 7;
+                            if(lowrank == 13){
+                                lowrank = 12;
+                            };
+                            if(ban == 0 && rank == 0){
+                                lowrank = 12;
+                            };
+                            arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
+                            parents[randnum].style.display = 'none';
+                        };
+                        if(rest[randnum].innerHTML == '-'){
+                            if(ban == 0){
+                                rest[randnum].innerHTML = next[5];
+                            } else {
+                                rest[randnum].innerHTML = next[0];
+                            }
+                        }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
+                            rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
+                        };
+                        spent[randnum].innerHTML = '0';
+                        del();
+                        set();
+                        save();
+                    } else {
+                        key = key + 1;
+                        if(key == possies[rank][0]){
+                            key = 0;
+                        };
+                        list();
                     };
-                    spent[randnum].innerHTML = '0';
-                    del();
+                } else {
+                    listall();
                 }
-                set();
-                save();
             }, 250);
             setTimeout(() => {
                 document.getElementById('enbox').style.transition = '';
@@ -318,7 +388,11 @@ document.getElementById('no').addEventListener('click',function(){
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         } else if(onoff == 'off'){
-            document.getElementById('enbox').style.left = '-100%';
+            if(rank >= 7){
+                document.getElementById('enbox').style.top = '-100px';
+            } else {
+                document.getElementById('enbox').style.left = '-100%';
+            };
             document.getElementById('bar').style.transition = ''; 
             document.getElementById('bar').style.left = ''; 
             document.getElementById('jp').style.visibility = '';
@@ -326,33 +400,65 @@ document.getElementById('no').addEventListener('click',function(){
             onoff = 'on';
             setTimeout(() => {
                 document.getElementById('enbox').style.transition = 'all 0s';
-                document.getElementById('enbox').style.left = '';
-                document.getElementById('enbox').style.top = '-100px';
-                if(rank <= 6 || rank == ''){
-                    if(rank == ''){
-                        arr[key].innerHTML = arr[key].innerHTML - 1;
-                        let lowkey = key + 6;
-                        if(lowkey == 6){
-                            lowkey = 7;
-                        };
-                        arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
-                    } else {
-                        arr[rank].innerHTML = arr[rank].innerHTML - 1;
-                        let lowrank = Number(rank) + 6;
-                        if(lowrank == 6){
-                            lowrank = 7;
-                        };
-                        arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
-                        parents[randnum].style.display = 'none';
-                    };
-                    if(rest[randnum].innerHTML == '-'){
-                        rest[randnum].innerHTML = next[0];
-                    };
-                    spent[randnum].innerHTML = '0';
-                    del();
+                if(rank >= 7){
+                    document.getElementById('enbox').style.top = '';
+                } else {
+                    document.getElementById('enbox').style.left = '';
                 };
-                set();
-                save();
+                if(rank >= 7){
+                    document.getElementById('enbox').style.top = '240px';
+                } else {
+                    document.getElementById('enbox').style.top = '-100px';
+                };
+                if(swi == 0){
+                    if(rank <= 6 || rank == ''){
+                        if(rank == ''){
+                            arr[key].innerHTML = arr[key].innerHTML - 1;
+                            let lowkey = key + 6;
+                            if(forb == 0){
+                                lowkey = lowkey - 1;
+                            } else if (forb == 2){
+                                lowkey = lowkey + 1;
+                            }
+                            if(lowkey == 6){
+                                lowkey = 7;
+                            } else if (lowkey == 13){
+                                lowkey = 12;
+                            };
+                            arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
+                        } else {
+                            arr[rank].innerHTML = arr[rank].innerHTML - 1;
+                            let lowrank = Number(rank) + 6;
+                            if(forb == 0){
+                                lowrank = lowrank - 1;
+                            } else if (forb == 2){
+                                lowrank = lowrank + 1;
+                            }
+                            if(lowrank == 6){
+                                lowrank = 7;
+                            } else if (lowrank == 13){
+                                lowrank = 12;
+                            };
+                            arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
+                            parents[randnum].style.display = 'none';
+                        };
+                        if(rest[randnum].innerHTML == '-'){
+                            rest[randnum].innerHTML = next[0];
+                        };
+                        spent[randnum].innerHTML = '0';
+                        del();
+                        set();
+                        save();
+                    } else {
+                        key = key - 1;
+                        if(key == -1){
+                            key = possies[rank][0] - 1;
+                        };
+                        list();
+                    };
+                } else {
+                    listall();
+                }
             }, 250);
             setTimeout(() => {
                 document.getElementById('enbox').style.transition = '';

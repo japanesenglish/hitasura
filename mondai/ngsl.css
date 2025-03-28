@@ -9,6 +9,12 @@ body{
     max-width: 600px;
     margin-left: 50%;
     transform: translate(-50%);
+    & #setting{
+        display: block;
+        margin-right: 10px;
+        text-align: right;
+        font-size: 125%;
+    }
     & #display{
         position: relative;
         border: black solid 1px;

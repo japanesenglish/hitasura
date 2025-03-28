@@ -2,12 +2,15 @@ let alloption = document.querySelectorAll('option');
 let speedlist = document.querySelectorAll('#speed>option');
 let swilist = document.querySelectorAll('#swi>option');
 let nextlist = document.querySelectorAll('.next>option');
+let forblist = document.querySelectorAll('#forb>option');
 let banlist = document.querySelectorAll('#ban>option');
 let speed = '';
 let swi = '';
 let next = '';
+let forb = '';
 let ban = '';
 let cookies = document.cookie;
+console.log(cookies);
 let cookieslist = cookies.split(';');
 let contents = [];
 //Cookie仕分け
@@ -20,6 +23,8 @@ cookieslist.forEach(function(car){
         swi = content[1];
     } else if (content[0] == 'next'){
         next = content[1];
+    } else if (content[0] == 'forb'){
+        forb = content[1];
     } else if (content[0] == 'ban'){
         ban = content[1];
     };
@@ -44,6 +49,9 @@ if(next !== ''){
         nextlist[Number(car) + i].setAttribute('selected','');
         i = i + 99;
     });
+};
+if(forb !== ''){
+    forblist[forb].setAttribute('selected','');
 };
 if(ban !== ''){
     banlist[ban].setAttribute('selected','');
@@ -96,6 +104,8 @@ document.getElementById('save').addEventListener('click',function(){
         document.cookie = 'speed=' + select;' max-age=31536000';
         var select = document.getElementById('swi').value;
         document.cookie = 'swi=' + select;' max-age=31536000';
+        var select = document.getElementById('forb').value;
+        document.cookie = 'forb=' + select;' max-age=31536000';
         var select = document.getElementById('ban').value;
         document.cookie = 'ban=' + select;' max-age=31536000';
         let noti =document.getElementById('savenoti');
