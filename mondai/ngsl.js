@@ -197,6 +197,9 @@ function set(){
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         }, speed * 1000);
+        var mp3file = document.getElementById('en').innerHTML + '.mp3';
+        var voice = new Audio(mp3file);
+        voice.play();
     } else {
         document.getElementById('en').innerHTML = 'finish';
         document.getElementById('jp').innerHTML = '';
@@ -295,9 +298,13 @@ document.getElementById('start').addEventListener('click',function(){
         }, 1000);
     }, 1000);
 });
+//音声再生
+document.getElementById('playaudio').addEventListener('click',function(){
+    voice.play();
+});
 //思い出せた
 var onoff = 'off';
-document.getElementById('yes').addEventListener('click',function(){
+document.getElementById('onyes').addEventListener('click',function(){
     if(key !== ''){
         if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
             clearTimeout(setid);
@@ -381,7 +388,7 @@ document.getElementById('yes').addEventListener('click',function(){
     }
 });
 //思い出せなかった
-document.getElementById('no').addEventListener('click',function(){
+document.getElementById('onno').addEventListener('click',function(){
     if(key !== ''){
         if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
             clearTimeout(setid);
