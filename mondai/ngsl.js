@@ -157,6 +157,8 @@ let rand = '';
 let randnum = '';
 let setid = '';
 let key = 0;
+let mp3file = '';
+let voice = '';
 function set(){
     if(rank == ''){
         key = 0;
@@ -197,9 +199,11 @@ function set(){
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         }, speed * 1000);
-        var mp3file = document.getElementById('en').innerHTML + '.mp3';
-        var voice = new Audio(mp3file);
-        voice.play();
+        mp3file = '../voice/' + document.getElementById('en').innerHTML + '.mp3';
+        voice = new Audio(mp3file);
+        setTimeout(() => {
+            voice.play();
+        }, 300);
     } else {
         document.getElementById('en').innerHTML = 'finish';
         document.getElementById('jp').innerHTML = '';
@@ -226,6 +230,11 @@ function list(){
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = ''; 
     }, speed * 1000);
+    mp3file = '../voice/' + document.getElementById('en').innerHTML + '.mp3';
+    voice = new Audio(mp3file);
+    setTimeout(() => {
+        voice.play();
+    }, 300);
 };
 function listall(){
     rand = Math.floor(Math.random() * ens.length);
