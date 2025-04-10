@@ -1,0 +1,251 @@
+@charset "utf-8";
+
+body{
+    background-color: rgb(255, 224, 247);
+}
+
+#box{
+    width: 90%;
+    max-width: 600px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    & #setting{
+        display: block;
+        margin-right: 10px;
+        text-align: right;
+        font-size: 125%;
+    }
+    & #display{
+        position: relative;
+        border: black solid 1px;
+        border-radius: 15px;
+        background-color: white;
+        height: 300px;
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+        & #explain{
+            position: absolute;
+            border-radius: 15px;
+            height: 100%;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            z-index: 2;
+            & p{
+                padding: 0px 20px;
+                text-align: left;
+                & #daseta{
+                    background-color: rgba(255, 255, 0, 0.600);
+                }
+                & #dasen{
+                    background-color: rgba(0, 0, 0, 0.250);
+                }
+            }
+            & #start{
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translate(-50%);
+                border: black solid 1px;
+                padding: 0px 10px;
+                background-color: white;
+                font-size: 150%;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+        & #countdown{
+            position: absolute;
+            border-radius: 15px 15px 0px 0px;
+            height: 100%;
+            width: 100%;
+            padding-top: 120px;
+            background-color: white;
+            font-size: 250%;
+            z-index: 1;
+
+        }
+        &>div:nth-last-of-type(1){
+            position: relative;
+            & #enbox{
+                position: relative;
+                top: 0px;
+                left: 0px;
+                height: 100px;
+                width: 100%;
+                transition: all 0.25s;
+                &>div:has(#en){
+                        position: absolute;
+                        bottom: 0px;
+                        width: 100%;
+                        margin-left: 50%;
+                        transform: translate(-50%);
+                    & #en{
+                        display: inline;
+                        font-size: 250%;
+                    }
+                    &>img{
+                        position: absolute;
+                        bottom: 10px;
+                        display: inline;
+                        border: rgba(0, 0, 0, 0.24) solid 3px;
+                        border-radius: 50%;
+                        margin-left: 10px;
+                        height: 40px;
+                        font-size: 25px;
+                        background-color: rgba(0, 0, 0, 0.068);
+                        &:hover{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            & #jpbox{
+                position: relative;
+                left: 0px;
+                height: 140px;
+                width: 100%;
+                transition: all 0.25s 0.1s;
+                & #jp{
+                    visibility: hidden;
+                    opacity: 0;
+                    position: absolute;
+                    top: 0px;
+                    width: 100%;
+                    margin-left: 50%;
+                    transform: translate(-50%);
+                    font-size: 200%;
+                    transition: none;
+                }
+            }
+            & #bar{
+                position: absolute;
+                top: 237px;
+                left: 0px;
+                border-bottom: black solid 1px;
+                height: 2px;
+                width: 200%;
+                background-color: black;
+                background: linear-gradient(to right,rgb(204, 204, 204) 50%,rgb(15, 15, 15) 50%);
+                transition: none;
+            }
+            &>div:has(#no){
+                position: relative;
+                & #no{
+                    position: absolute;
+                    left: 0px;
+                    display: inline-block;
+                    background-color: rgb(196, 196, 196);
+                    height: 60px;
+                    line-height: 60px;
+                    width: 50%;
+                    &::after{
+                        position: absolute;
+                        top: 0px;
+                        right: -1px;
+                        content: '';
+                        height: 100%;
+                        width: 2px;
+                        background-color: black;
+                    }
+                }
+                & #yes{
+                    position: absolute;
+                    right: 0px;
+                    display: inline-block;
+                    background-color: rgb(253, 255, 135);
+                    height: 60px;
+                    line-height: 60px;
+                    width: 50%;
+                }
+                & #onno{
+                    position: absolute;
+                    left: 0px;
+                    display: inline-block;
+                    height: 60px;
+                    line-height: 60px;
+                    width: 50%;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                & #onyes{
+                    position: absolute;
+                    right: 0px;
+                    display: inline-block;
+                    height: 60px;
+                    line-height: 60px;
+                    width: 50%;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    & #possi{
+        margin: 20px 0px;
+        & table{
+            border-collapse: collapse;
+            border: black solid 1px;
+            width: 100%;
+            & th,td{
+                border: black solid 1px;
+                width: 6.66%;
+                background-color: white;
+            }
+            & td:hover{
+                cursor: pointer;
+                &.dont{
+                    cursor: auto;
+                }
+            }
+            & tr:nth-of-type(1) th{
+                padding: 0px;
+            }
+            & tr:nth-of-type(4){
+                text-align: right;
+            }
+            & tr:nth-of-type(5) td{
+                text-align: right;
+                background-color: rgb(228, 229, 236);
+            }
+        }
+    }
+    & #list{
+        margin: 10px 0px;
+        & summary:hover{
+            cursor: pointer;
+        }
+        & .word{
+            background-color: white;
+            border: black solid 1px;
+            padding-left: 2px;
+            height: 33px;
+            & div{
+                display: inline-block;
+                border-bottom: black solid 1px;
+                height: 33px;
+                overflow: auto;
+                &:nth-of-type(1){
+                    width: 37%;
+                    text-align: left;
+                }
+                &:nth-of-type(2){
+                    width: 50%;
+                    text-align: left;
+                }
+                &:nth-of-type(3){
+                    width: 6%;
+                    text-align: right;
+                }
+                &:nth-of-type(4){
+                    width: 6%;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
