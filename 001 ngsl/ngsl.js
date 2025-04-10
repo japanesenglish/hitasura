@@ -199,7 +199,13 @@ function set(){
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         }, speed * 1000);
-        mp3file = 'voice/' + document.getElementById('en').innerHTML + '.mp3';
+        if(Number(randnum) < 1000){
+            mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+        } else if (Number(randnum) < 2000){
+            mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+        } else if (Number(randnum) < 3000){
+            mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+        };
         voice = new Audio(mp3file);
         setTimeout(() => {
             voice.play();
@@ -230,7 +236,13 @@ function list(){
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = ''; 
     }, speed * 1000);
-    mp3file = 'voice/' + document.getElementById('en').innerHTML + '.mp3';
+    if(Number(randnum) < 1000){
+        mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(randnum) < 2000){
+        mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(randnum) < 3000){
+        mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+    };
     voice = new Audio(mp3file);
     setTimeout(() => {
         voice.play();
