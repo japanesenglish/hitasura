@@ -2,12 +2,18 @@
 
 body{
     background-color: rgb(255, 224, 247);
+    & .goquestion{
+        font-size: 200%;
+    }
+    & .gray{
+        color: rgb(53, 53, 53);
+    }
+    & a>img{
+        margin-left: -2px;
+        margin-bottom: -5px;
+        height: 20px;
+    }
 }
 
-.goquestion{
-    font-size: 200%;
-}
 
-.gray{
-    color: rgb(53, 53, 53);
-}
+
