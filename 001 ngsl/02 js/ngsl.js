@@ -563,40 +563,39 @@ function save(){
 }
 
 //使い方
+let o = 0;
 document.getElementById('howto').addEventListener('click',function(){
-    document.getElementById('box').style.display = 'none';
     document.getElementById('close').style.display = 'block';
     document.getElementById('expic').style.display = 'block';
     document.getElementById('paper').style.display = 'block';
+    document.getElementById('cover').style.display = 'block';
     document.getElementById('grayback').style.height = document.documentElement.scrollHeight + 'px';
+    setTimeout(() => {
+        o = 1;
+    }, 300);
 });
 document.querySelector('#close>span').addEventListener('click',function(){
     document.getElementById('grayback').style.height = '';
+    document.getElementById('cover').style.display = '';
     document.getElementById('paper').style.display = '';
     document.getElementById('expic').style.display = '';
     document.getElementById('close').style.display = '';
-    document.getElementById('box').style.display = '';
+    o = 0;
 });
-//move
-let m = '';
-document.getElementById('paper').addEventListener('pointermove',function(event){
-    event.preventDefault();
-    if(event.buttons == 1){
-        if(m == ''){
-            let left = this.offsetLeft;
-            this.style.transform = 'translate(0%)';
-            this.style.margin = '0px';
-            this.style.left = left - (this.offsetWidth / 2) + 'px';
-        };
-        m = 1;
-        let screenWidth = window.innerWidth;
-        let screenHeight = window.innerHeight;
-        this.style.left = Math.max((this.offsetWidth * -1) + 50, Math.min(this.offsetLeft + event.movementX, screenWidth - 50))  + 'px';
-        this.style.top = Math.max((this.offsetHeight * -1) + 50, Math.min(this.offsetTop + event.movementY, screenHeight - 50)) + 'px';
-        this.style.cursor = 'grabbing';
-        this.draggable = false;
-        this.setPointerCapture(event.pointerId);
-    } else {
-        this.style.cursor = 'grab';
+//open
+document.getElementById('cover').addEventListener('click',function(){
+    if(o == 1){
+        document.getElementById('paper').style.right = '0px';
+        document.getElementById('cover').style.display = 'none';
+    };
+});
+document.querySelector('body').addEventListener('click',function(event){
+    if(event.target.getAttribute('id') !== 'cover' && event.target.getAttribute('id') !== 'paper'){
+        document.getElementById('paper').style.right = '';
+        setTimeout(() => {
+            if(o == 1){
+                document.getElementById('cover').style.display = 'block';
+            };
+        }, 300);
     };
 });
