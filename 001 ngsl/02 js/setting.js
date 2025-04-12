@@ -35,7 +35,7 @@ if(speed !== ''){
     alloption.forEach(function(car){
         car.removeAttribute('selected');
     });
-    speedlist[speed].setAttribute('selected','');
+    speedlist[speed - 1].setAttribute('selected','');
 };
 if(swi !== ''){
     swilist[swi].setAttribute('selected','');

@@ -47,7 +47,8 @@ cookieslist.forEach(function(car){
     }
 });
 
-//前回訪問からの経過日 実験中！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
+//前回訪問からの経過日
 let today = new Date;
 let sub = '';
 if(day !== ''){
@@ -89,6 +90,15 @@ if(typeof next == 'string'){
         next[i] = Number(next[i]);
     };
 };
+if(rank !== ''){
+    if(rank == 0){
+        document.getElementById('rank').innerHTML = '未出題'
+    } else if (rank <= 6){
+        document.getElementById('rank').innerHTML = '復習(' + next[Number(rank) - 1] + '日経過)' 
+    } else {
+        document.getElementById('rank').innerHTML = '待機中(' + next[Number(rank) - 7] + '日)'
+    }
+}
 //rest適応
 rest = document.querySelectorAll('.word>div:nth-of-type(4)');
 if(ngsldef !== ''){
@@ -264,6 +274,17 @@ function listall(){
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = ''; 
     }, speed * 1000);
+    if(Number(rand) < 1000){
+        mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(rand) < 2000){
+        mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(rand) < 3000){
+        mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+    };
+    voice = new Audio(mp3file);
+    setTimeout(() => {
+        voice.play();
+    }, 300);
 }
 
 //choose
@@ -288,8 +309,8 @@ arr.forEach(function(car){
 });
 //ボタン変更
 if(rank >= 7){
-    document.getElementById('yes').innerHTML = '次へ';
-    document.getElementById('no').innerHTML = '前へ';
+    document.getElementById('yes').innerHTML = '次の単語';
+    document.getElementById('no').innerHTML = '前の単語';
 };
 //list絞り込み
 let parents = document.querySelectorAll('.word');
@@ -304,7 +325,7 @@ if(rank !== ''){
 
 //スタート
 document.getElementById('start').addEventListener('click',function(){
-    document.getElementById('explain').style.display = 'none';
+    document.getElementById('front').style.display = 'none';
     setTimeout(() => {
         document.getElementById('countdown').innerHTML = '2';
         setTimeout(() => {
@@ -328,7 +349,7 @@ document.getElementById('playaudio').addEventListener('click',function(){
 });
 //思い出せた
 var onoff = 'off';
-document.getElementById('onyes').addEventListener('click',function(){
+document.getElementById('yes').addEventListener('click',function(){
     if(key !== ''){
         if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
             clearTimeout(setid);
@@ -412,7 +433,7 @@ document.getElementById('onyes').addEventListener('click',function(){
     }
 });
 //思い出せなかった
-document.getElementById('onno').addEventListener('click',function(){
+document.getElementById('no').addEventListener('click',function(){
     if(key !== ''){
         if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
             clearTimeout(setid);
@@ -540,3 +561,41 @@ function save(){
     document.cookie = 'ngslspent2=' + ngslspent2;' max-age=31536000';
     document.cookie = 'ngsldef=' + ngsldef;' max-age=31536000';
 }
+
+//使い方
+document.getElementById('howto').addEventListener('click',function(){
+    document.getElementById('box').style.display = 'none';
+    document.getElementById('close').style.display = 'block';
+    document.getElementById('expic').style.display = 'block';
+    document.getElementById('paper').style.display = 'block';
+    document.getElementById('grayback').style.height = document.documentElement.scrollHeight + 'px';
+});
+document.querySelector('#close>span').addEventListener('click',function(){
+    document.getElementById('grayback').style.height = '';
+    document.getElementById('paper').style.display = '';
+    document.getElementById('expic').style.display = '';
+    document.getElementById('close').style.display = '';
+    document.getElementById('box').style.display = '';
+});
+//move
+let m = '';
+document.getElementById('paper').addEventListener('pointermove',function(event){
+    if(event.buttons == 1){
+        if(m == ''){
+            let left = this.offsetLeft;
+            this.style.transform = 'translate(0%)';
+            this.style.margin = '0px';
+            this.style.left = left - (this.offsetWidth / 2) + 'px';
+        };
+        m = 1;
+        let screenWidth = window.innerWidth;
+        let screenHeight = window.innerHeight;
+        this.style.left = Math.max((this.offsetWidth * -1) + 50, Math.min(this.offsetLeft + event.movementX, screenWidth - 50))  + 'px';
+        this.style.top = Math.max((this.offsetHeight * -1) + 50, Math.min(this.offsetTop + event.movementY, screenHeight - 50)) + 'px';
+        this.style.cursor = 'grabbing';
+        this.draggable = false;
+        this.setPointerCapture(event.pointerId);
+    } else {
+        this.style.cursor = 'grab';
+    };
+});

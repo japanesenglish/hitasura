@@ -11,10 +11,13 @@
     </head>
     <body>
         <div id="box">
-            <h2><a href="../index.html">ホーム</a> > NGSL</h2>
-            <a href="setting.html" id="setting">設定</a>
+            <h2><a href="../index.html">ホーム</a> > NGSL<span id="rank"></span></h2>
+            <div>
+                <a href="setting.html" id="setting">設定</a>
+                <span id="howto">使い方<img src="../img/hatena.png" alt="?"></span>
+            </div>
             <div id="display">
-                <div id="explain">
+                <div id="front">
                     <p>
                         <span id="daseta">「思い出せた」</span>を押すことで次回の出題が、<b>”翌日→3日後→7日後→14日後→30日後→60日後(以後ループ)”</b>と伸びていきます。<br>
                         ※設定から変更できます。
@@ -22,20 +25,18 @@
                     <div id="start">スタート</div>
                 </div>
                 <div id="countdown">3</div>
-                <div>
+                <div class="real">
                     <div id="enbox"><div><div id="en"></div><img src="../img/audio_mark.png" alt="🔊" id="playaudio"></div></div>
                     <div id="jpbox"><div id="jp"></div></div>
                     <div id="bar"></div>
                     <div>
                         <div id="no">思い出せなかった</div>
                         <div id="yes">思い出せた</div>
-                        <div id="onno"></div>
-                        <div id="onyes"></div>
                     </div>
                 </div>
             </div>
             <div id="possi">
-                <div>本日の出題可能数</div>
+                <div>学習状況</div>
                 <table>
                     <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
                     <tr><th rowspan="2" colspan="3">未出題</th><th colspan="12">復習</th></tr>
@@ -1589,7 +1590,7 @@
                 <div class="word"><div>might</div><div>…してもよい，…かもしれない</div><div>-</div><div>-</div></div>
                 <div class="word"><div>mile</div><div>マイル</div><div>-</div><div>-</div></div>
                 <div class="word"><div>military</div><div>軍の，軍隊の</div><div>-</div><div>-</div></div>
-                <div class="word"><div>milk</div><div>牛乳，ミルク</div><div>-</div><div>-</div></div>
+                <div class="word"><div>milk</div><div>牛乳</div><div>-</div><div>-</div></div>
                 <div class="word"><div>mind</div><div>知性，精神</div><div>-</div><div>-</div></div>
                 <div class="word"><div>mine</div><div>私のもの，鉱山，地雷</div><div>-</div><div>-</div></div>
                 <div class="word"><div>minimum</div><div>最小の，最低の</div><div>-</div><div>-</div></div>
@@ -2858,11 +2859,34 @@
                 <div class="word"><div>zone</div><div>地帯，地域</div><div>-</div><div>-</div></div>
             </details>
             <small>
-                ◍当問題集は<a href="https://www.newgeneralservicelist.com/new-general-service-list" target="_blank">New General Service List Project<img src="../img/target_blank.png"></a>が提供するデータに日本語訳および音声を加えたもので、<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja#ref-indicate-changes" target="_blank">「表示 – 継承 4.0 国際 (CC BY-SA 4.0)」<img src="../img/target_blank.png"></a>ライセンスの下に提供されています。<br>
+                ◍当問題集は<a href="https://www.newgeneralservicelist.com/" target="_blank">New General Service List Project<img src="../img/target_blank.png"></a>が提供するデータに日本語訳および音声を加えたもので、<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja#ref-indicate-changes" target="_blank">「表示 – 継承 4.0 国際 (CC BY-SA 4.0)」<img src="../img/target_blank.png"></a>ライセンスの下に提供されています。<br>
                 ◍再生される音声は<a href="https://vidweb.co.jp/" target="_blank">動画制作会社VIDWEB<img src="../img/target_blank.png"></a>のボイスゲートを利用しています。
             </small>
         </div>
-
+        <div id="grayback">
+        </div>
+        <img src="../img/explain2.PNG" id="expic">
+        <div id="paper">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>説明書</div>
+            <div><span class="red">①</span>英単語：出題は基本的にランダムです。</div>
+            <div><span class="red">②</span>日本語訳</div>
+            <div><span class="red">③</span>制限時間：終わると日本語訳が表示されます。→設定</div>
+            <div><span class="red">④</span>左ボタン：思い出せなかったら押してください。</div>
+            <div><span class="red">⑤</span>右ボタン：思い出せたら押してください。</div>
+            <div><span class="red">⑥</span>復習頻度：各復習日から次の復習日までの期間を表します。→設定<br>
+                （注）初回回答日からの累計期間ではありません。</div>
+            <div><span class="red">⑦</span>出題可能数：未出題の単語および各復習期限の到来した単語の数を表します。<br>
+                復習期限の到来した単語が復習期間の短い順に出題され、最後に未出題の単語が出題されます。また、各セルを選択することで、該当する単語のみが出題されるようになります。もう一度同じセルを選択することで解除可能です。</div>
+            <div><span class="red">⑧</span>回答済み数：すでに回答済みで、次回の復習期限が未だ到来していない単語の数を表します。<br>
+                ⑦と同じように各セルを選択することはできますが、確認用にアルファベット順に出題されるのみで、学習記録には影響しません。</div>
+            <div><span class="red">⑨</span>英単語リスト：アルファベット順にリストされています。<br>
+                ⑦や⑧でセルを選択した場合、該当する単語のみがリストされます。</div>
+        </div>
+        <div id="close"><span>×</span></div>
 
         <script src="02 js/ngsl.js"></script>
     </body>
