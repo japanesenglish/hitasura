@@ -580,6 +580,7 @@ document.querySelector('#close>span').addEventListener('click',function(){
 //move
 let m = '';
 document.getElementById('paper').addEventListener('pointermove',function(event){
+    event.preventDefault();
     if(event.buttons == 1){
         if(m == ''){
             let left = this.offsetLeft;
