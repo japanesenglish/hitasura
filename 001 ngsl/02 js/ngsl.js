@@ -209,6 +209,7 @@ function set(){
         document.getElementById('jp').style.visibility = 'visible';
         document.getElementById('jp').style.opacity = '1';
         setid = setTimeout(() => {
+            document.getElementById('jpbox').style.background = 'transparent'; 
             document.getElementById('jp').style.transition = ''; 
             document.getElementById('bar').style.transition = ''; 
         }, speed * 1000);
@@ -516,25 +517,25 @@ var rest_time = 'off';
 document.getElementById('jpbox').addEventListener('click',function(){
     if(rest_time == 'off'){
         clearTimeout(setid);
+        document.getElementById('jpbox').style.background = 'transparent'; 
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = '';
-        document.getElementById('jpbox').style.background = 'transparent'; 
     };
 });
 document.getElementById('yes').addEventListener('click',function(){
     if(rest_time == 'off'){
         clearTimeout(setid);
+        document.getElementById('jpbox').style.background = 'transparent'; 
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = '';
-        document.getElementById('jpbox').style.background = 'transparent'; 
     };
 });
 document.getElementById('no').addEventListener('click',function(){
     if(rest_time == 'off'){
         clearTimeout(setid);
+        document.getElementById('jpbox').style.background = 'transparent'; 
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = '';
-        document.getElementById('jpbox').style.background = 'transparent'; 
     };
 });
 
