@@ -315,7 +315,7 @@ h2 #rank{
     bottom: 0px;
     height: 50px;
     width: 100vw;
-    background-color: rgba(0, 195, 255, 0.459);
+    background-color: rgba(0, 195, 255, 0.377);
     user-select: none;
     touch-action: none;
     &>span{
