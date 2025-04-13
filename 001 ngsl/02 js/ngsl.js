@@ -568,7 +568,8 @@ document.getElementById('howto').addEventListener('click',function(){
     document.getElementById('close').style.display = 'block';
     document.getElementById('expic').style.display = 'block';
     document.getElementById('paper').style.display = 'block';
-    document.getElementById('cover').style.display = 'block';
+    document.getElementById('paper').style.left = window.innerWidth - 50 + 'px';
+    document.getElementById('slide').style.display = 'flex';
     document.getElementById('grayback').style.height = document.documentElement.scrollHeight + 'px';
     setTimeout(() => {
         o = 1;
@@ -576,26 +577,21 @@ document.getElementById('howto').addEventListener('click',function(){
 });
 document.querySelector('#close>span').addEventListener('click',function(){
     document.getElementById('grayback').style.height = '';
-    document.getElementById('cover').style.display = '';
+    document.getElementById('slide').style.display = '';
     document.getElementById('paper').style.display = '';
     document.getElementById('expic').style.display = '';
     document.getElementById('close').style.display = '';
     o = 0;
 });
-//open
-document.getElementById('cover').addEventListener('click',function(){
-    if(o == 1){
-        document.getElementById('paper').style.right = '0px';
-        document.getElementById('cover').style.display = 'none';
-    };
-});
-document.querySelector('body').addEventListener('click',function(event){
-    if(event.target.getAttribute('id') !== 'cover' && event.target.getAttribute('id') !== 'paper'){
-        document.getElementById('paper').style.right = '';
-        setTimeout(() => {
-            if(o == 1){
-                document.getElementById('cover').style.display = 'block';
-            };
-        }, 300);
+//move
+document.getElementById('slide').addEventListener('pointermove',function(event){
+    event.preventDefault();
+    if(event.buttons == 1){
+        document.getElementById('paper').style.left = Math.max(document.getElementById('paper').offsetWidth * -1 + 20, Math.min(document.getElementById('paper').offsetLeft + event.movementX, window.innerWidth - 30)) + 'px';
+        document.getElementById('slide').style.cursor = 'grabbing';
+        document.getElementById('slide').draggable = false;
+        document.getElementById('slide').setPointerCapture(event.pointerId);
+    } else {
+        document.getElementById('slide').style.cursor = 'grab';
     };
 });

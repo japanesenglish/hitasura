@@ -265,7 +265,7 @@ h2 #rank{
     display: none;
     position: fixed;
     top: 45px;
-    width: 95%;
+    width: 100%;
     max-width: 600px;
     margin-left: 50%;
     transform: translate(-50%);
@@ -275,7 +275,7 @@ h2 #rank{
     display: none;
     position: fixed;
     top: 0px;
-    width: 95%;
+    width: 100%;
     max-width: 600px;
     margin-left: 50%;
     transform: translate(-50%);
@@ -303,22 +303,26 @@ h2 #rank{
     display: none;
     position: fixed;
     top: 0px;
-    right: -410px;
+    left: 0px;
     height: 100%;
     width: 90%;
     max-width: 400px;
     border: black solid 1px;
-    transition: all 0.5s;
 }
-#cover{
+#slide{
     display: none;
     position: fixed;
-    top: 0px;
-    right: -360px;
-    height: 100vh;
-    width: 400px;
-    background-color: rgba(0, 195, 255, 0.281);
-    font-size: 200%;
-    line-height: 100vh;
+    bottom: 0px;
+    height: 50px;
+    width: 100vw;
+    background-color: rgba(0, 195, 255, 0.459);
+    user-select: none;
+    touch-action: none;
+    &>span{
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+        font-size: 200%;
+        color: rgb(0, 0, 0);
+    }
 }
-
