@@ -565,33 +565,15 @@ function save(){
 //使い方
 let o = 0;
 document.getElementById('howto').addEventListener('click',function(){
+    document.getElementById('box').style.display = 'none';
     document.getElementById('close').style.display = 'block';
-    document.getElementById('expic').style.display = 'block';
-    document.getElementById('paper').style.display = 'block';
-    document.getElementById('paper').style.left = window.innerWidth - 50 + 'px';
-    document.getElementById('slide').style.display = 'flex';
+    document.getElementById('explain').style.display = 'block';
     document.getElementById('grayback').style.height = document.documentElement.scrollHeight + 'px';
-    setTimeout(() => {
-        o = 1;
-    }, 300);
 });
 document.querySelector('#close>span').addEventListener('click',function(){
     document.getElementById('grayback').style.height = '';
-    document.getElementById('slide').style.display = '';
-    document.getElementById('paper').style.display = '';
-    document.getElementById('expic').style.display = '';
+    document.getElementById('explain').style.display = '';
     document.getElementById('close').style.display = '';
-    o = 0;
+    document.getElementById('box').style.display = '';
 });
-//move
-document.getElementById('slide').addEventListener('pointermove',function(event){
-    event.preventDefault();
-    if(event.buttons == 1){
-        document.getElementById('paper').style.left = Math.max(document.getElementById('paper').offsetWidth * -1 + 20, Math.min(document.getElementById('paper').offsetLeft + event.movementX, window.innerWidth - 30)) + 'px';
-        document.getElementById('slide').style.cursor = 'grabbing';
-        document.getElementById('slide').draggable = false;
-        document.getElementById('slide').setPointerCapture(event.pointerId);
-    } else {
-        document.getElementById('slide').style.cursor = 'grab';
-    };
-});
+

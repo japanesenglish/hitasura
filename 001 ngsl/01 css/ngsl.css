@@ -257,19 +257,20 @@ h2 #rank{
     position: absolute;
     top: 0px;
     left: 0px;
-    background-color: rgba(128, 128, 128, 0.548);
+    background-color: rgba(0, 0, 0, 0.548);
     height: 0px;
     width: 100vw;
 }
-#expic{
+
+#explain{
     display: none;
     position: fixed;
-    top: 45px;
+    top: 0px;
+    height: 100%;
     width: 100%;
     max-width: 600px;
     margin-left: 50%;
     transform: translate(-50%);
-    border: black solid 1px;
 }
 #close{
     display: none;
@@ -279,7 +280,7 @@ h2 #rank{
     max-width: 600px;
     margin-left: 50%;
     transform: translate(-50%);
-    text-align: left;
+    text-align: right;
     &>span{
         display: inline-block;
         border: rgba(0, 0, 0, 0.534) solid 3px;
@@ -296,33 +297,5 @@ h2 #rank{
         &:hover{
             cursor: pointer;
         }
-    }
-}
-
-#paper{
-    display: none;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 90%;
-    max-width: 400px;
-    border: black solid 1px;
-}
-#slide{
-    display: none;
-    position: fixed;
-    bottom: 0px;
-    height: 50px;
-    width: 100vw;
-    background-color: rgba(0, 195, 255, 0.377);
-    user-select: none;
-    touch-action: none;
-    &>span{
-        display: inline-block;
-        flex: 1;
-        text-align: center;
-        font-size: 200%;
-        color: rgb(0, 0, 0);
     }
 }

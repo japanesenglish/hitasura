@@ -2,19 +2,27 @@
 
 body{
     background-color: rgb(255, 255, 255);
-    margin: 5px;
-    padding-bottom: 50px;
+    margin: 0px;
 }
 
-div{
-    line-height: 120%;
-    margin: 10px 0px;
-    &:has(.red){
-        margin-top: -2px;
-        &>.red{
-            margin-right: 5px;
-            font-size: 150%;
-            color: rgb(255, 0, 0);
+#exbox{
+    #expic{
+        width: 100%;
+        border-bottom: black solid 1px;
+    }
+    #paper{
+        margin: 5px;
+        div{
+            line-height: 120%;
+            margin: 10px 0px;
+            &:has(.red){
+                margin-top: -2px;
+                &>.red{
+                    margin-right: 5px;
+                    font-size: 150%;
+                    color: rgb(255, 0, 0);
+                }
+            }
         }
     }
 }
