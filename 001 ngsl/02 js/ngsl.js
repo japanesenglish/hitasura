@@ -565,7 +565,6 @@ function save(){
 //使い方
 let o = 0;
 document.getElementById('howto').addEventListener('click',function(){
-    document.getElementById('box').style.display = 'none';
     document.getElementById('close').style.display = 'block';
     document.getElementById('explain').style.display = 'block';
     document.getElementById('grayback').style.height = document.documentElement.scrollHeight + 'px';
@@ -574,6 +573,5 @@ document.querySelector('#close>span').addEventListener('click',function(){
     document.getElementById('grayback').style.height = '';
     document.getElementById('explain').style.display = '';
     document.getElementById('close').style.display = '';
-    document.getElementById('box').style.display = '';
 });
 
