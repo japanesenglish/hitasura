@@ -53,12 +53,6 @@ h2 #rank{
             & p{
                 padding: 0px 20px;
                 text-align: left;
-                & #daseta{
-                    background-color: rgba(255, 255, 0, 0.600);
-                }
-                & #dasen{
-                    background-color: rgba(0, 0, 0, 0.250);
-                }
             }
             & #start{
                 position: absolute;
@@ -125,7 +119,7 @@ h2 #rank{
                 left: 0px;
                 height: 140px;
                 width: 100%;
-                transition: all 0.25s 0.1s;
+                background-color: rgba(0, 0, 0, 0.2);
                 & #jp{
                     visibility: hidden;
                     opacity: 0;
@@ -208,7 +202,7 @@ h2 #rank{
             }
             & tr:nth-of-type(5) td{
                 text-align: right;
-                background-color: rgb(228, 229, 236);
+                background-color: rgb(197, 199, 214);
             }
         }
     }

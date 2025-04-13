@@ -348,179 +348,194 @@ document.getElementById('playaudio').addEventListener('click',function(){
     voice.play();
 });
 //思い出せた
-var onoff = 'off';
 document.getElementById('yes').addEventListener('click',function(){
-    if(key !== ''){
-        if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
-            clearTimeout(setid);
-            document.getElementById('jp').style.transition = ''; 
-            document.getElementById('bar').style.transition = ''; 
-        } else if(onoff == 'off'){
-            if(rank >= 7){
-                document.getElementById('enbox').style.top = '240px';
-            } else {
-                document.getElementById('enbox').style.left = '100%';
-            };
-            document.getElementById('bar').style.transition = ''; 
-            document.getElementById('bar').style.left = ''; 
-            document.getElementById('jp').style.visibility = '';
-            document.getElementById('jp').style.opacity = '';
-            onoff = 'on';
-            setTimeout(() => {
-                document.getElementById('enbox').style.transition = 'all 0s';
-                if(rank >= 7){
-                    document.getElementById('enbox').style.top = '';
-                } else {
-                    document.getElementById('enbox').style.left = '';
-                };
-                document.getElementById('enbox').style.top = '-100px';
-                if(swi == 0){
-                    if(rank <= 6 || rank == ''){
-                        if(rank == ''){
-                            arr[key].innerHTML = arr[key].innerHTML - 1;
-                            let lowkey = key + 7;
-                            if(lowkey == 13){
-                                lowkey = 12;
-                            };
-                            if(ban == 0 && key == 0){
-                                lowkey = 12;
-                            };
-                            arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
-                        } else {
-                            arr[rank].innerHTML = arr[rank].innerHTML - 1;
-                            let lowrank = Number(rank) + 7;
-                            if(lowrank == 13){
-                                lowrank = 12;
-                            };
-                            if(ban == 0 && rank == 0){
-                                lowrank = 12;
-                            };
-                            arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
-                            parents[randnum].style.display = 'none';
-                        };
-                        if(rest[randnum].innerHTML == '-'){
-                            if(ban == 0){
-                                rest[randnum].innerHTML = next[5];
-                            } else {
-                                rest[randnum].innerHTML = next[0];
-                            }
-                        }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
-                            rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
-                        };
-                        spent[randnum].innerHTML = '0';
-                        del();
-                        set();
-                        save();
-                    } else {
-                        key = key + 1;
-                        if(key == possies[rank][0]){
-                            key = 0;
-                        };
-                        list();
-                    };
-                } else {
-                    listall();
-                }
-            }, 250);
-            setTimeout(() => {
-                document.getElementById('enbox').style.transition = '';
-                document.getElementById('enbox').style.top = '';
-            }, 350);
-            setTimeout(() => {
-                onoff = 'off';
-            }, 600);
+    if(key !== '' && rest_time == 'off' && document.getElementById('bar').style.transition == ''){
+        if(rank >= 7){
+            document.getElementById('enbox').style.top = '240px';
+        } else {
+            document.getElementById('enbox').style.left = '100%';
         };
+        document.getElementById('bar').style.transition = ''; 
+        document.getElementById('bar').style.left = ''; 
+        document.getElementById('jpbox').style.background = '';
+        document.getElementById('jp').style.visibility = '';
+        document.getElementById('jp').style.opacity = '';
+        rest_time = 'on';
+        setTimeout(() => {
+            document.getElementById('enbox').style.transition = 'all 0s';
+            if(rank >= 7){
+                document.getElementById('enbox').style.top = '';
+            } else {
+                document.getElementById('enbox').style.left = '';
+            };
+            document.getElementById('enbox').style.top = '-100px';
+            if(swi == 0){
+                if(rank <= 6 || rank == ''){
+                    if(rank == ''){
+                        arr[key].innerHTML = arr[key].innerHTML - 1;
+                        let lowkey = key + 7;
+                        if(lowkey == 13){
+                            lowkey = 12;
+                        };
+                        if(ban == 0 && key == 0){
+                            lowkey = 12;
+                        };
+                        arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
+                    } else {
+                    arr[rank].innerHTML = arr[rank].innerHTML - 1;
+                        let lowrank = Number(rank) + 7;
+                        if(lowrank == 13){
+                            lowrank = 12;
+                        };
+                        if(ban == 0 && rank == 0){
+                            lowrank = 12;
+                        };
+                        arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
+                        parents[randnum].style.display = 'none';
+                    };
+                    if(rest[randnum].innerHTML == '-'){
+                        if(ban == 0){
+                            rest[randnum].innerHTML = next[5];
+                        } else {
+                            rest[randnum].innerHTML = next[0];
+                        }
+                    }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
+                        rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
+                    };
+                    spent[randnum].innerHTML = '0';
+                    del();
+                    set();
+                    save();
+                } else {
+                    key = key + 1;
+                    if(key == possies[rank][0]){
+                        key = 0;
+                    };
+                    list();
+                };
+            } else {
+                listall();
+            }
+        }, 250);
+        setTimeout(() => {
+            document.getElementById('enbox').style.transition = '';
+            document.getElementById('enbox').style.top = '';
+        }, 350);
+        setTimeout(() => {
+            rest_time = 'off';
+        }, 600);
     }
 });
 //思い出せなかった
 document.getElementById('no').addEventListener('click',function(){
-    if(key !== ''){
-        if(document.getElementById('jp').style.transition !== '' && onoff == 'off'){
-            clearTimeout(setid);
-            document.getElementById('jp').style.transition = ''; 
-            document.getElementById('bar').style.transition = ''; 
-        } else if(onoff == 'off'){
-            if(rank >= 7){
-                document.getElementById('enbox').style.top = '-100px';
-            } else {
-                document.getElementById('enbox').style.left = '-100%';
-            };
-            document.getElementById('bar').style.transition = ''; 
-            document.getElementById('bar').style.left = ''; 
-            document.getElementById('jp').style.visibility = '';
-            document.getElementById('jp').style.opacity = '';
-            onoff = 'on';
-            setTimeout(() => {
-                document.getElementById('enbox').style.transition = 'all 0s';
-                if(rank >= 7){
-                    document.getElementById('enbox').style.top = '';
-                } else {
-                    document.getElementById('enbox').style.left = '';
-                };
-                if(rank >= 7){
-                    document.getElementById('enbox').style.top = '240px';
-                } else {
-                    document.getElementById('enbox').style.top = '-100px';
-                };
-                if(swi == 0){
-                    if(rank <= 6 || rank == ''){
-                        if(rank == ''){
-                            arr[key].innerHTML = arr[key].innerHTML - 1;
-                            let lowkey = key + 6;
-                            if(forb == 0){
-                                lowkey = lowkey - 1;
-                            } else if (forb == 2){
-                                lowkey = lowkey + 1;
-                            }
-                            if(lowkey == 6){
-                                lowkey = 7;
-                            } else if (lowkey == 13){
-                                lowkey = 12;
-                            };
-                            arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
-                        } else {
-                            arr[rank].innerHTML = arr[rank].innerHTML - 1;
-                            let lowrank = Number(rank) + 6;
-                            if(forb == 0){
-                                lowrank = lowrank - 1;
-                            } else if (forb == 2){
-                                lowrank = lowrank + 1;
-                            }
-                            if(lowrank == 6){
-                                lowrank = 7;
-                            } else if (lowrank == 13){
-                                lowrank = 12;
-                            };
-                            arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
-                            parents[randnum].style.display = 'none';
-                        };
-                        if(rest[randnum].innerHTML == '-'){
-                            rest[randnum].innerHTML = next[0];
-                        };
-                        spent[randnum].innerHTML = '0';
-                        del();
-                        set();
-                        save();
-                    } else {
-                        key = key - 1;
-                        if(key == -1){
-                            key = possies[rank][0] - 1;
-                        };
-                        list();
-                    };
-                } else {
-                    listall();
-                }
-            }, 250);
-            setTimeout(() => {
-                document.getElementById('enbox').style.transition = '';
-                document.getElementById('enbox').style.top = '';
-            }, 350);
-            setTimeout(() => {
-                onoff = 'off';
-            }, 600);
+    if(key !== '' && rest_time == 'off' && document.getElementById('bar').style.transition == ''){
+        if(rank >= 7){
+            document.getElementById('enbox').style.top = '-100px';
+        } else {
+            document.getElementById('enbox').style.left = '-100%';
         };
-    }
+        document.getElementById('bar').style.transition = ''; 
+        document.getElementById('bar').style.left = ''; 
+        document.getElementById('jpbox').style.background = '';
+        document.getElementById('jp').style.visibility = '';
+        document.getElementById('jp').style.opacity = '';
+        rest_time = 'on';
+        setTimeout(() => {
+            document.getElementById('enbox').style.transition = 'all 0s';
+            if(rank >= 7){
+                document.getElementById('enbox').style.top = '';
+            } else {
+                document.getElementById('enbox').style.left = '';
+            };
+            if(rank >= 7){
+                document.getElementById('enbox').style.top = '240px';
+            } else {
+                document.getElementById('enbox').style.top = '-100px';
+            };
+            if(swi == 0){
+                if(rank <= 6 || rank == ''){
+                    if(rank == ''){
+                        arr[key].innerHTML = arr[key].innerHTML - 1;
+                        let lowkey = key + 6;
+                        if(forb == 0){
+                            lowkey = lowkey - 1;
+                        } else if (forb == 2){
+                            lowkey = lowkey + 1;
+                        }
+                        if(lowkey == 6){
+                            lowkey = 7;
+                        } else if (lowkey == 13){
+                            lowkey = 12;
+                        };
+                        arr[lowkey].innerHTML = Number(arr[lowkey].innerHTML) + 1;
+                    } else {
+                        arr[rank].innerHTML = arr[rank].innerHTML - 1;
+                        let lowrank = Number(rank) + 6;
+                        if(forb == 0){
+                            lowrank = lowrank - 1;
+                        } else if (forb == 2){
+                            lowrank = lowrank + 1;
+                        }
+                        if(lowrank == 6){
+                            lowrank = 7;
+                        } else if (lowrank == 13){
+                            lowrank = 12;
+                        };
+                        arr[lowrank].innerHTML = Number(arr[lowrank].innerHTML) + 1;
+                        parents[randnum].style.display = 'none';
+                    };
+                    if(rest[randnum].innerHTML == '-'){
+                        rest[randnum].innerHTML = next[0];
+                    };
+                    spent[randnum].innerHTML = '0';
+                    del();
+                    set();
+                    save();
+                } else {
+                    key = key - 1;
+                    if(key == -1){
+                        key = possies[rank][0] - 1;
+                    };
+                    list();
+                };
+            } else {
+                listall();
+            }
+        }, 250);
+        setTimeout(() => {
+            document.getElementById('enbox').style.transition = '';
+            document.getElementById('enbox').style.top = '';
+        }, 350);
+        setTimeout(() => {
+            rest_time = 'off';
+        }, 600);  
+    };
+});
+//skip
+var rest_time = 'off';
+document.getElementById('jpbox').addEventListener('click',function(){
+    if(rest_time == 'off'){
+        clearTimeout(setid);
+        document.getElementById('jp').style.transition = ''; 
+        document.getElementById('bar').style.transition = '';
+        document.getElementById('jpbox').style.background = 'transparent'; 
+    };
+});
+document.getElementById('yes').addEventListener('click',function(){
+    if(rest_time == 'off'){
+        clearTimeout(setid);
+        document.getElementById('jp').style.transition = ''; 
+        document.getElementById('bar').style.transition = '';
+        document.getElementById('jpbox').style.background = 'transparent'; 
+    };
+});
+document.getElementById('no').addEventListener('click',function(){
+    if(rest_time == 'off'){
+        clearTimeout(setid);
+        document.getElementById('jp').style.transition = ''; 
+        document.getElementById('bar').style.transition = '';
+        document.getElementById('jpbox').style.background = 'transparent'; 
+    };
 });
 
 //Cookie保存
