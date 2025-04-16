@@ -43,7 +43,7 @@ cookieslist.forEach(function(car){
         ban = content[1];
     };
     if(content[0] !== ''){
-        document.cookie = content[0] + '=' + content[1];' max-age=31536000';
+        document.cookie = content[0] + '=' + content[1]'; max-age=31536000';
     }
 });
 
@@ -81,7 +81,7 @@ if(ngslspent1 !== '' && ngslspent2 !== ''){
         spentv.push('-')
     })
 };
-document.cookie = 'day=' + today.getFullYear() + 'a' + (Number(today.getMonth()) + 1) + 'a' + today.getDate();' max-age=31536000';
+document.cookie = 'day=' + today.getFullYear() + 'a' + (Number(today.getMonth()) + 1) + 'a' + today.getDate()'; max-age=31536000';
 //next適応
 if(typeof next == 'string'){
     next = next.split('a');
@@ -300,10 +300,10 @@ arr.forEach(function(car){
         let element = car;
         if(rank != arr.indexOf(car) || rank == ''){
             element.style.background = 'gray';
-            document.cookie = 'rank=' + arr.indexOf(car);' max-age=31536000';
+            document.cookie = 'rank=' + arr.indexOf(car)'; max-age=31536000';
         } else {
             element.style.background = '';
-            document.cookie = 'rank=';' max-age=0';
+            document.cookie = 'rank=; max-age=0';
         }
         window.location.reload();
     });
@@ -573,9 +573,9 @@ function save(){
         };
     });
 
-    document.cookie = 'ngslspent1=' + ngslspent1;' max-age=31536000';
-    document.cookie = 'ngslspent2=' + ngslspent2;' max-age=31536000';
-    document.cookie = 'ngsldef=' + ngsldef;' max-age=31536000';
+    document.cookie = 'ngslspent1=' + ngslspent1'; max-age=31536000';
+    document.cookie = 'ngslspent2=' + ngslspent2'; max-age=31536000';
+    document.cookie = 'ngsldef=' + ngsldef'; max-age=31536000';
 }
 
 //使い方
