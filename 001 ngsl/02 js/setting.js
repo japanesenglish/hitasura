@@ -99,15 +99,15 @@ document.getElementById('save').addEventListener('click',function(){
         bar = Number(car.value);
     });
     if(can == ''){
-        document.cookie = 'next=' + select'; max-age=31536000';
+        document.cookie = 'next=' + select + '; max-age=31536000';
         var select = document.getElementById('speed').value;
-        document.cookie = 'speed=' + select'; max-age=31536000';
+        document.cookie = 'speed=' + select + '; max-age=31536000';
         var select = document.getElementById('swi').value;
-        document.cookie = 'swi=' + select'; max-age=31536000';
+        document.cookie = 'swi=' + select + '; max-age=31536000';
         var select = document.getElementById('forb').value;
-        document.cookie = 'forb=' + select'; max-age=31536000';
+        document.cookie = 'forb=' + select + '; max-age=31536000';
         var select = document.getElementById('ban').value;
-        document.cookie = 'ban=' + select'; max-age=31536000';
+        document.cookie = 'ban=' + select + '; max-age=31536000';
         let noti =document.getElementById('savenoti');
         noti.style.top = '10px';
         setTimeout(() => {
