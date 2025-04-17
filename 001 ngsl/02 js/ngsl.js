@@ -2,10 +2,14 @@ let ens = [];
 let jps = [];
 let spent = [];
 let spentv = [];
+let count = [];
+let countv = [];
 let rest = [];
 let day = '';
 let ngslspent1 = '';
 let ngslspent2 = '';
+let ngslcount1 = '';
+let ngslcount2 = '';
 let speed = 4;
 let swi = 0;
 let rank = '';
@@ -27,6 +31,10 @@ cookieslist.forEach(function(car){
         ngslspent1 = content[1];
     } else if (content[0] == 'ngslspent2'){
         ngslspent2 = content[1];
+    } else if (content[0] == 'ngslcount1'){
+        ngslcount1 = content[1];
+    } else if (content[0] == 'ngslcount2'){
+        ngslcount2 = content[1];
     } else if (content[0] == 'speed'){
         speed = content[1];
     } else if (content[0] == 'swi'){
@@ -76,10 +84,6 @@ if(ngslspent1 !== '' && ngslspent2 !== ''){
         spent[i].innerHTML = spentv[i]
         i = i + 1;
     });
-} else {
-    spent.forEach(function(){
-        spentv.push('-')
-    })
 };
 document.cookie = 'day=' + today.getFullYear() + 'a' + (Number(today.getMonth()) + 1) + 'a' + today.getDate() + '; max-age=31536000';
 //next適応
@@ -92,14 +96,13 @@ if(typeof next == 'string'){
 };
 if(rank !== ''){
     if(rank == 0){
-        document.getElementById('rank').innerHTML = '未出題'
+        document.getElementById('rank').innerHTML = '未出題';
     } else if (rank <= 6){
-        document.getElementById('rank').innerHTML = '復習(' + next[Number(rank) - 1] + '日経過)' 
+        document.getElementById('rank').innerHTML = '復習(' + next[Number(rank) - 1] + '日前)';
     } else {
-        document.getElementById('rank').innerHTML = '待機中(' + next[Number(rank) - 7] + '日)'
+        document.getElementById('rank').innerHTML = '待機中(' + next[Number(rank) - 7] + '日後)';
     }
 }
-//rest適応
 rest = document.querySelectorAll('.word>div:nth-of-type(4)');
 if(ngsldef !== ''){
     ngsldef = [...ngsldef];
@@ -111,6 +114,22 @@ if(ngsldef !== ''){
         } else {
             element.innerHTML = next[ngsldef[i]];
         };
+        i = i + 1;
+    });
+};
+//count適応
+count = document.querySelectorAll('.word>div:nth-of-type(5)');
+if(ngslcount1 !== '' && ngslcount2 !== ''){
+    ngslcount1 = [...ngslcount1];
+    ngslcount2 = [...ngslcount2];
+    let i = 0;
+    ngslcount1.forEach(function(car){
+        let past = (Number(car) * 10) + Number(ngslcount2[i]) + Number(sub);
+        if(past > 99){
+            past = '99';
+        }
+        countv.push(past);
+        count[i].innerHTML = countv[i]
         i = i + 1;
     });
 };
@@ -203,6 +222,16 @@ function set(){
     if(key !== ''){
         document.getElementById('en').innerHTML = ens[randnum].innerHTML;
         document.getElementById('jp').innerHTML = jps[randnum].innerHTML;
+        if(spent[randnum].innerHTML == '-'){
+            document.getElementById('dis_spent').innerHTML = '初出題';
+            document.getElementById('dis_count').innerHTML = '';
+        } else if (spent[randnum].innerHTML == '0'){
+            document.getElementById('dis_spent').innerHTML = '前回：今日';
+            document.getElementById('dis_count').innerHTML = '累計：' + count[randnum].innerHTML + '回';
+        } else {
+            document.getElementById('dis_spent').innerHTML = '前回：' + spent[randnum].innerHTML + '日前';
+            document.getElementById('dis_count').innerHTML = '累計：' + count[randnum].innerHTML + '回';
+        };
         document.getElementById('bar').style.transition = 'all linear ' + speed + 's';
         document.getElementById('bar').style.left = '-100%';
         document.getElementById('jp').style.transition = 'all 0s ' + speed + 's';
@@ -214,11 +243,11 @@ function set(){
             document.getElementById('bar').style.transition = ''; 
         }, speed * 1000);
         if(Number(randnum) < 1000){
-            mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+            mp3file = '../../audio/001 voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
         } else if (Number(randnum) < 2000){
-            mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+            mp3file = '../../audio/001 voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
         } else if (Number(randnum) < 3000){
-            mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+            mp3file = '../../audio/001 voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
         };
         voice = new Audio(mp3file);
         setTimeout(() => {
@@ -229,33 +258,32 @@ function set(){
         document.getElementById('jp').innerHTML = '';
     };
 };
-function del(){
-    if(rank == ''){
-        possies[key][0] = possies[key][0] - 1;
-        possies[key][1].splice(rand,1);
-    } else {
-        possies[rank][0] = possies[rank][0] - 1;
-        possies[rank][1].splice(rand,1);
-    };
-};
-function list(){
+function check(){
     document.getElementById('en').innerHTML = ens[possies[rank][1][key]].innerHTML;
     document.getElementById('jp').innerHTML = jps[possies[rank][1][key]].innerHTML;
+    if (spent[possies[rank][1][key]].innerHTML == '0'){
+        document.getElementById('dis_spent').innerHTML = '前回：今日';
+        document.getElementById('dis_count').innerHTML = '累計：' + count[possies[rank][1][key]].innerHTML + '回';
+    } else {
+        document.getElementById('dis_spent').innerHTML = '前回：' + spent[possies[rank][1][key]].innerHTML + '日前';
+        document.getElementById('dis_count').innerHTML = '累計：' + count[possies[rank][1][key]].innerHTML + '回';
+    };
     document.getElementById('bar').style.transition = 'all linear ' + speed + 's';
     document.getElementById('bar').style.left = '-100%';
     document.getElementById('jp').style.transition = 'all 0s ' + speed + 's';
     document.getElementById('jp').style.visibility = 'visible';
     document.getElementById('jp').style.opacity = '1';
     setid = setTimeout(() => {
+        document.getElementById('jpbox').style.background = 'transparent'; 
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = ''; 
     }, speed * 1000);
-    if(Number(randnum) < 1000){
-        mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
-    } else if (Number(randnum) < 2000){
-        mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
-    } else if (Number(randnum) < 3000){
-        mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+    if(Number(possies[rank][1][key]) < 1000){
+        mp3file = '../../audio/001 voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(possies[rank][1][key]) < 2000){
+        mp3file = '../../audio/001 voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+    } else if (Number(possies[rank][1][key]) < 3000){
+        mp3file = '../../audio/001 voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
     };
     voice = new Audio(mp3file);
     setTimeout(() => {
@@ -272,21 +300,31 @@ function listall(){
     document.getElementById('jp').style.visibility = 'visible';
     document.getElementById('jp').style.opacity = '1';
     setid = setTimeout(() => {
+        document.getElementById('jpbox').style.background = 'transparent'; 
         document.getElementById('jp').style.transition = ''; 
         document.getElementById('bar').style.transition = ''; 
     }, speed * 1000);
     if(Number(rand) < 1000){
-        mp3file = 'voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
+        mp3file = '../../audio/001 voice ~1000/' + document.getElementById('en').innerHTML + '.mp3';
     } else if (Number(rand) < 2000){
-        mp3file = 'voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
+        mp3file = '../../audio/001 voice ~2000/' + document.getElementById('en').innerHTML + '.mp3';
     } else if (Number(rand) < 3000){
-        mp3file = 'voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
+        mp3file = '../../audio/001 voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
     };
     voice = new Audio(mp3file);
     setTimeout(() => {
         voice.play();
     }, 300);
 }
+function del(){
+    if(rank == ''){
+        possies[key][0] = possies[key][0] - 1;
+        possies[key][1].splice(rand,1);
+    } else {
+        possies[rank][0] = possies[rank][0] - 1;
+        possies[rank][1].splice(rand,1);
+    };
+};
 
 //choose
 let arr = Array.from(document.querySelectorAll('td'))
@@ -303,7 +341,7 @@ arr.forEach(function(car){
             document.cookie = 'rank=' + arr.indexOf(car) + '; max-age=31536000';
         } else {
             element.style.background = '';
-            document.cookie = 'rank=; max-age=0';
+            document.cookie = 'rank=' + '; max-age=0';
         }
         window.location.reload();
     });
@@ -336,13 +374,13 @@ document.getElementById('start').addEventListener('click',function(){
                 if(swi == 1){
                     listall();
                 } else if (rank >= 7){
-                    list();
+                    check();
                 } else {
                     set();
                 };
-            }, 1000);
-        }, 1000);
-    }, 1000);
+            }, 900);
+        }, 900);
+    }, 900);
 });
 //音声再生
 document.getElementById('playaudio').addEventListener('click',function(){
@@ -404,6 +442,9 @@ document.getElementById('yes').addEventListener('click',function(){
                         rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
                     };
                     spent[randnum].innerHTML = '0';
+                    if(Number(count[randnum].innerHTML) < 99){
+                        count[randnum].innerHTML = Number(count[randnum].innerHTML) + 1;
+                    };
                     del();
                     set();
                     save();
@@ -412,7 +453,7 @@ document.getElementById('yes').addEventListener('click',function(){
                     if(key == possies[rank][0]){
                         key = 0;
                     };
-                    list();
+                    check();
                 };
             } else {
                 listall();
@@ -489,6 +530,9 @@ document.getElementById('no').addEventListener('click',function(){
                         rest[randnum].innerHTML = next[0];
                     };
                     spent[randnum].innerHTML = '0';
+                    if(Number(count[randnum].innerHTML) < 99){
+                        count[randnum].innerHTML = Number(count[randnum].innerHTML) + 1;
+                    };
                     del();
                     set();
                     save();
@@ -497,7 +541,7 @@ document.getElementById('no').addEventListener('click',function(){
                     if(key == -1){
                         key = possies[rank][0] - 1;
                     };
-                    list();
+                    check();
                 };
             } else {
                 listall();
@@ -545,7 +589,7 @@ function save(){
     ngslspent2 = '';
     spent.forEach(function(car){
         let dar = car.innerHTML;
-        if(dar >= 10 && dar !== '-'){
+        if(Number(dar) >= 10 && dar !== '-'){
             dar = [...dar];
             ngslspent1 = ngslspent1 + dar[0];
             ngslspent2 = ngslspent2 + dar[1];
@@ -554,6 +598,19 @@ function save(){
             ngslspent2 = ngslspent2 + dar;
         };
     });
+    ngslcount1 = '';
+    ngslcount2 = '';
+    count.forEach(function(car){
+        let dar = car.innerHTML;
+        if(Number(dar) >= 10){
+            dar = [...dar];
+            ngslcount1 = ngslcount1 + dar[0];
+            ngslcount2 = ngslcount2 + dar[1];
+        } else {
+            ngslcount1 = ngslcount1 + '0';
+            ngslcount2 = ngslcount2 + dar;
+        };
+    })
     ngsldef = '';
     rest.forEach(function(car){
         if(car.innerHTML == '-'){
@@ -575,6 +632,8 @@ function save(){
 
     document.cookie = 'ngslspent1=' + ngslspent1 + '; max-age=31536000';
     document.cookie = 'ngslspent2=' + ngslspent2 + '; max-age=31536000';
+    document.cookie = 'ngslcount1=' + ngslcount1 + '; max-age=31536000';
+    document.cookie = 'ngslcount2=' + ngslcount2 + '; max-age=31536000';
     document.cookie = 'ngsldef=' + ngsldef + '; max-age=31536000';
 }
 

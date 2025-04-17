@@ -12,16 +12,16 @@ body{
     }
     #paper{
         margin: 5px;
-        div{
+        &>div{
             line-height: 120%;
             margin: 10px 0px;
-            &:has(.red){
-                margin-top: -2px;
-                &>.red{
-                    margin-right: 5px;
-                    font-size: 150%;
-                    color: rgb(255, 0, 0);
-                }
+            &>.red{
+                margin-right: 5px;
+                font-size: 150%;
+                color: rgb(255, 0, 0);
+            }
+            &>div{
+                margin-top: 10px;
             }
         }
     }

@@ -145,7 +145,3 @@ body{
     text-align: center;
     transition: all 0.5s;
 }
-
-& .red{
-    color: red;
-}

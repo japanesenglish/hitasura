@@ -88,6 +88,12 @@ h2 #rank{
                 height: 100px;
                 width: 100%;
                 transition: all 0.25s;
+                &>div:has(#dis_spent){
+                    padding: 5px;
+                    &>div{
+                        text-align: left;
+                    }
+                }
                 &>div:has(#en){
                         position: absolute;
                         bottom: 0px;
@@ -211,6 +217,23 @@ h2 #rank{
         & summary:hover{
             cursor: pointer;
         }
+        &>div:nth-of-type(1){
+            position: relative;
+            &>div{
+                display: inline-block;
+                &:nth-of-type(1){
+                    width: 33%;
+                }
+                &:nth-of-type(2){
+                    width: 48%;
+                }
+                &:nth-of-type(3){
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                }
+            }
+        }
         & .word{
             background-color: white;
             border: black solid 1px;
@@ -222,18 +245,24 @@ h2 #rank{
                 height: 33px;
                 overflow: auto;
                 &:nth-of-type(1){
-                    width: 37%;
+                    width: 33%;
                     text-align: left;
                 }
                 &:nth-of-type(2){
-                    width: 50%;
+                    height: 29px;
+                    width: 48%;
                     text-align: left;
+                    line-height: 120%;
                 }
                 &:nth-of-type(3){
                     width: 6%;
                     text-align: right;
                 }
                 &:nth-of-type(4){
+                    width: 6%;
+                    text-align: right;
+                }
+                &:nth-of-type(5){
                     width: 6%;
                     text-align: right;
                 }
