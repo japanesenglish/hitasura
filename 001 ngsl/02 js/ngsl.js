@@ -285,7 +285,7 @@ function check(){
     } else if (Number(possies[rank][1][key]) < 3000){
         mp3file = '../../audio/001 voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
     };
-    voice = new Audio('../../img/a.mp3');
+    voice = new Audio('a.mp3');
     setTimeout(() => {
         voice.play();
     }, 300);
