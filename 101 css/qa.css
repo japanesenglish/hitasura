@@ -15,15 +15,13 @@ body{
         font-size: 70%;
         color: rgb(0, 0, 0);
     }
-    & div:has(#take){
+    & #take{
         position: absolute;
         top: 0px;
-        width: 100%;
+        right: 0px;
         max-width: 600px;
         text-align: right;
-        & #take{
-            font-size: 120%;
-        }
+        font-size: 120%;
     }
     & div:has(#setting){
         & #setting{
