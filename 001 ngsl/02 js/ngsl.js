@@ -249,7 +249,7 @@ function set(){
         } else if (Number(randnum) < 3000){
             mp3file = '../../audio/001 voice ~3000/' + document.getElementById('en').innerHTML + '.mp3';
         };
-        voice = new Audio(mp3file);
+        voice = new Audio('../../audio/a.mp3');
         setTimeout(() => {
             voice.play();
         }, 300);
