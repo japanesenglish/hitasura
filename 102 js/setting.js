@@ -108,14 +108,7 @@ document.getElementById('save').addEventListener('click',function(){
         document.cookie = 'forb=' + select + '; max-age=31536000';
         var select = document.getElementById('ban').value;
         document.cookie = 'ban=' + select + '; max-age=31536000';
-        let noti =document.getElementById('savenoti');
-        noti.style.top = '10px';
-        setTimeout(() => {
-            noti.style.top = '-100px';
-            setTimeout(() => {
-                noti.style.top = '';
-            }, 500);
-        }, 2000);
+        alert('保存完了');
     } else {
         document.getElementById('grayback').style.display = 'block';
         document.getElementById('err').style.display = 'block';
@@ -140,12 +133,5 @@ document.getElementById('yes').addEventListener('click',function(){
         console.log(car)
         document.cookie = car + '=; max-age=0';
     });
-    let noti =document.getElementById('resetnoti');
-    noti.style.top = '10px';
-    setTimeout(() => {
-        noti.style.top = '-100px';
-        setTimeout(() => {
-            noti.style.top = '';
-        }, 500);
-    }, 2000);
+    alert('削除完了');
 });
