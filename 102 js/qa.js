@@ -15,7 +15,7 @@ let swi = 0;
 let rank = '';
 let forb = 1;
 let ban = 0;
-let next = [1,3,7,14,30,60];
+let next = ['-',1,3,7,14,30,60];
 let rest_c = '';
 let a = 0;
 let cookies = document.cookie;
@@ -107,10 +107,6 @@ document.cookie = 'day=' + today.getFullYear() + 'a' + (Number(today.getMonth())
 //next,rest適応
 if(typeof next == 'string'){
     next = next.split('a');
-    next.shift();
-    for(let i = 0; i <= 5; i++){
-        next[i] = Number(next[i]);
-    };
 };
 if(rank !== ''){
     if(rank == 0){
@@ -122,16 +118,14 @@ if(rank !== ''){
     }
 }
 rest = document.querySelectorAll('.word>div:nth-of-type(4)');
+rest_n = document.querySelectorAll('.word>div:nth-of-type(6)');
 if(rest_c !== ''){
     rest_c = [...rest_c];
     let i = 0;
-    rest.forEach(function(car){
+    rest_n.forEach(function(car){
         let element = car;
-        if(rest_c[i] == '-'){
-            element.innerHTML = rest_c[i];
-        } else {
-            element.innerHTML = next[rest_c[i]];
-        };
+        element.innerHTML = rest_c[i];
+        rest[i].innerHTML = next[element.innerHTML];
         i = i + 1;
     });
 };
@@ -160,7 +154,7 @@ if(rank !== ''){
         document.querySelector(where).style.background = 'gray';
     };
 };
-a = 0;
+a = 1;
 document.querySelectorAll('.nows').forEach(function(car){
     car.innerHTML = next[a] + 'd';
     a = a + 1;
@@ -181,11 +175,11 @@ spent.forEach(function(car){
         possies[0][0] = possies[0][0] + 1;
         possies[0][1].push(a);
     } else if (Number(car.innerHTML) >= Number(rest[a].innerHTML)){
-        let i = Number(next.indexOf(Number(rest[a].innerHTML))) + 1;
+        let i = Number(rest_n[a].innerHTML);
         possies[i][0] = possies[i][0] + 1;
         possies[i][1].push(a);
     } else {
-        let i = Number(next.indexOf(Number(rest[a].innerHTML))) + 7;
+        let i = Number(rest_n[a].innerHTML) + 6;
         possies[i][0] = possies[i][0] + 1;
         possies[i][1].push(a);
     };
@@ -271,8 +265,14 @@ function set(){
             voice.play();
         }, 300);
     } else {
-        document.getElementById('en').innerHTML = 'finish';
+        document.getElementById('en').innerHTML = '終了';
         document.getElementById('jp').innerHTML = '';
+        document.getElementById('dis_spent').innerHTML = '';
+        document.getElementById('dis_count').innerHTML = '';
+        document.getElementById('playaudio').style.display = 'none';
+        voice = new Audio('../audio/警官のホイッスル2.mp3');
+        voice.volume = 0.5;
+        voice.play();
     };
 };
 function check(){
@@ -451,12 +451,15 @@ document.getElementById('yes').addEventListener('click',function(){
                     };
                     if(rest[randnum].innerHTML == '-'){
                         if(ban == 0){
-                            rest[randnum].innerHTML = next[5];
+                            rest_n[randnum].innerHTML = 6;
+                            rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
                         } else {
-                            rest[randnum].innerHTML = next[0];
-                        }
-                    }else if (Number(rest[randnum].innerHTML) <= Number(next[4])){
-                        rest[randnum].innerHTML = next[next.indexOf(Number(rest[randnum].innerHTML)) + 1];
+                            rest_n[randnum].innerHTML = 1;
+                            rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
+                        };
+                    }else if (Number(rest_n[randnum].innerHTML) <= 5){
+                        rest_n[randnum].innerHTML = Number(rest_n[randnum].innerHTML) + 1;
+                        rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
                     };
                     spent[randnum].innerHTML = '0';
                     if(Number(count[randnum].innerHTML) < 99){
@@ -544,7 +547,14 @@ document.getElementById('no').addEventListener('click',function(){
                         parents[randnum].style.display = 'none';
                     };
                     if(rest[randnum].innerHTML == '-'){
-                        rest[randnum].innerHTML = next[0];
+                        rest_n[randnum].innerHTML = 1;
+                        rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
+                    } else if (forb == 2 && Number(rest_n[randnum].innerHTML) <= 5){
+                        rest_n[randnum].innerHTML = Number(rest_n[randnum].innerHTML) + 1;
+                        rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
+                    } else if (forb == 0 && Number(rest_n[randnum].innerHTML) >= 2){
+                        rest_n[randnum].innerHTML = Number(rest_n[randnum].innerHTML) - 1;
+                        rest[randnum].innerHTML = next[rest_n[randnum].innerHTML];
                     };
                     spent[randnum].innerHTML = '0';
                     if(Number(count[randnum].innerHTML) < 99){
@@ -629,22 +639,8 @@ function save(){
         };
     })
     rest_c = '';
-    rest.forEach(function(car){
-        if(car.innerHTML == '-'){
-            rest_c = rest_c + '-';
-        } else if (car.innerHTML == next[0]){
-            rest_c = rest_c + '0';
-        } else if (car.innerHTML == next[1]){
-            rest_c = rest_c + '1';
-        } else if (car.innerHTML == next[2]){
-            rest_c = rest_c + '2';
-        } else if (car.innerHTML == next[3]){
-            rest_c = rest_c + '3';
-        } else if (car.innerHTML == next[4]){
-            rest_c = rest_c + '4';
-        } else if (car.innerHTML == next[5]){
-            rest_c = rest_c + '5';
-        };
+    rest_n.forEach(function(car){
+        rest_c = String(rest_c) + String(car.innerHTML);
     });
 
     document.cookie = 'spent_c1=' + spent_c1 + '; max-age=31536000';
@@ -652,7 +648,7 @@ function save(){
     document.cookie = 'count_c1=' + count_c1 + '; max-age=31536000';
     document.cookie = 'count_c2=' + count_c2 + '; max-age=31536000';
     document.cookie = 'rest_c=' + rest_c + '; max-age=31536000';
-}
+};
 
 //使い方
 let o = 0;

@@ -83,41 +83,28 @@ function gray(){
             element.style.color = '';
         });
     };
-}
+};
 
 //保存ボタン
 document.getElementById('save').addEventListener('click',function(){
     let days = document.querySelectorAll('.next');
-    var select = '';
+    var select = '-';
     let bar = 0;
     let can = '';
     days.forEach(function(car){
         select = select + 'a' + car.value;
-        if(bar > Number(car.value)){
-            can = 'not';
-        };
-        bar = Number(car.value);
     });
-    if(can == ''){
-        document.cookie = 'next=' + select + '; max-age=31536000';
-        var select = document.getElementById('speed').value;
-        document.cookie = 'speed=' + select + '; max-age=31536000';
-        var select = document.getElementById('swi').value;
-        document.cookie = 'swi=' + select + '; max-age=31536000';
-        var select = document.getElementById('forb').value;
-        document.cookie = 'forb=' + select + '; max-age=31536000';
-        var select = document.getElementById('ban').value;
-        document.cookie = 'ban=' + select + '; max-age=31536000';
-        alert('保存完了');
-    } else {
-        document.getElementById('grayback').style.display = 'block';
-        document.getElementById('err').style.display = 'block';
-    };
+    document.cookie = 'next=' + select + '; max-age=31536000';
+    var select = document.getElementById('speed').value;
+    document.cookie = 'speed=' + select + '; max-age=31536000';
+    var select = document.getElementById('swi').value;
+    document.cookie = 'swi=' + select + '; max-age=31536000';
+    var select = document.getElementById('forb').value;
+    document.cookie = 'forb=' + select + '; max-age=31536000';
+    var select = document.getElementById('ban').value;
+    document.cookie = 'ban=' + select + '; max-age=31536000';
+    alert('保存完了');
 });
-document.getElementById('ok').addEventListener('click',function(){
-    document.getElementById('grayback').style.display = '';
-    document.getElementById('err').style.display = '';
-})
 //リセットボタン
 document.getElementById('reset').addEventListener('click',function(){
     document.getElementById('grayback').style.display = 'block';
