@@ -17,7 +17,7 @@ document.getElementById('import').addEventListener('change',function(event){
                     document.getElementById('result').innerHTML = '引継ぎ完了';
                 })
             } else {
-                document.getElementById('result').innerHTML = 'error：ファイルが適切ではありません。<br>ファイル内のテキストが' + document.getElementById('kind').innerHTML + ';から始まるものが対象です。';
+                document.getElementById('result').innerHTML = 'error：ファイルが適切ではありません。<br>ファイル内のテキストが「' + document.getElementById('kind').innerHTML + ';」から始まるものが対象です。';
             }
         };
     } else {
