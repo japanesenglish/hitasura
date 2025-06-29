@@ -33,13 +33,16 @@ body{
             margin: 10px;
             font-size: 100%;
         }
+        & #iphone{
+            margin-top: 60px;
+        }
         & #manual{
             border: black solid 1px;
             padding: 5px;
-            margin-top: 20px;
+            margin-top: 10px;
             background-color: white;
             &>div{
-                margin-top: 30px;
+                margin-top: 5px;
                 &>#copy{
                     margin-top: 10px;
                     margin-bottom: 5px;
