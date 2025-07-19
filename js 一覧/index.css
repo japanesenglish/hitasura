@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+body{
+    background-color: gray;
+    &>.content{
+        display: flex;
+        &>.box{
+            position: relative;
+            height: 200px;
+            width: 200px;
+            background-color: white;
+            margin: 10px;
+            &>div:nth-of-type(1){
+                position: absolute;
+                top: 30px;
+                left: 50%;
+                transform: translate(-50%);
+                width: 150px;
+                &#ac1{
+                    & .c1{
+                        background-color: rgba(0, 0, 255, 0.3);
+                    }
+                    & .c2{
+                        height: 0px;
+                        background-color: rgba(0, 255, 255, 0.3);
+                        overflow: hidden;
+                        transition: all 0.5s;
+                    }
+                }
+                &#ac2{
+                    & .c1{
+                        height: 1lh;
+                        background-color: rgba(0, 0, 255, 0.3);
+                        overflow: hidden;
+                        transition: all 0.5s;
+                    }
+                }
+            }
+            &>div:nth-of-type(2){
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+            }
+        }
+    }
+}

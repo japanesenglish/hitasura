@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>ひたすら英単語　BSL</title>
+        <link rel="icon" href="../img/icon.png">
+        <link rel="apple-touch-icon" sizes="192x192" href="../img/icon.jpg">
+        <link rel="stylesheet" type="text/css" href="../101 css/take_over.css" />
+    </head>
+    <body>
+        <div id="box">
+            <h2><a href="../index.html">ホーム</a> > <a href="qa.html" id="kind">BSL</a> > 引継ぎ</h2>
+            <div id="imbox">
+                <div class="tit">ファイル読み込み</div>
+                <div>前回出力したtextファイルを読み込み、データを引き継ぎます。</div>
+                <div><input id="import" type="file"></div>
+                <div id="result"></div>
+            </div>
+            <div id="exbox">
+                <div class="tit">ファイル出力</div>
+                <div>現在の学習データをtextファイルで出力します。</div>
+                <div><input id="export" type="button" value="ファイルを出力"></div>
+                <div id="iphone">※<b>iPhoneのSafari</b>からだと、たまにファイルのダウンロードが完了しない場合があります。お手数ですが以下の方法でもtxtファイルを作成することができます。</div>
+                <div id="manual">
+                    <div>
+                        ①以下のテキスト（学習記録データ）をコピーしてiPhone標準搭載の「メモアプリ」に貼り付けます。<br>
+                        <input type="button" value="コピー" id="copy">
+                        <div id="textdata"></div>
+                    </div>
+                    <div>
+                        ②共有ボタンを押します。<br>
+                        <img src="../img/import1.PNG">
+                    </div>
+                    <div>
+                        ③「共同作業」のところを「コピーを送信」にします。<br>
+                        <img src="../img/import2.PNG">
+                    </div>
+                    <div>
+                        ③「”ファイル”に保存」を押すとtxtファイルとして保存されます。分かりやすい名前を付けて保存してください。<br>
+                        <img src="../img/import3.PNG">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../102 js/take_over.js"></script>
+    </body>
+</html>
